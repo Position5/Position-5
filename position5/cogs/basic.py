@@ -1,5 +1,5 @@
 from discord.ext import commands
-from datetime import datetime as d
+from datetime import datetime as dt
 
 
 class Basic(commands.Cog):
@@ -14,14 +14,14 @@ class Basic(commands.Cog):
         aliases=['p']
     )
     async def ping_command(self, ctx):
-        start = d.timestamp(d.now())
+        start = dt.timestamp(dt.now())
         # Gets the timestamp when the command was used
 
         msg = await ctx.send(content='Pinging')
         # Sends a message to the user in the channel the message with the command was received.
         # Notifies the user that pinging has started
 
-        await msg.edit(content=f'Pong!\nOne message round-trip took {(d.timestamp(d.now())-start) * 1000}ms.')
+        await msg.edit(content=f'Pong!\nOne message round-trip took {(dt.timestamp(dt.now())-start) * 1000}ms.')
         # Ping completed and round-trip duration show in ms
         # Since it takes a while to send the messages, it will calculate how much time it takes to edit an message.
         # It depends usually on your internet connection speed
@@ -46,6 +46,8 @@ class Basic(commands.Cog):
         # Next we get the message with the command in it.
         msg = ctx.message.content
 
+        await ctx.message.delete()
+
         # Extracting the text sent by the user
         # ctx.invoked_with gives the alias used
         # ctx.prefix gives the prefix used while invoking the command
@@ -56,16 +58,11 @@ class Basic(commands.Cog):
         # Next, we check if the user actually passed some text
         if text == '':
             # User didn't specify the text
-
             await ctx.send(content='You need to specify the text!')
 
-            pass
         else:
             # User specified the text.
-
             await ctx.send(content=f"**{text}**")
-
-            pass
 
         return
 
