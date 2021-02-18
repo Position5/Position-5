@@ -1,11 +1,12 @@
 from discord.ext import commands
 import discord
 
+
 class MemePic(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-    
+
     @commands.command(
         name='xdoubt',
         description='xdoubt pic'

@@ -4,6 +4,7 @@ from discord.ext import commands
 import replit
 import keep_alive
 
+
 load_dotenv('.env')
 
 
@@ -21,7 +22,8 @@ def get_prefix(client, message):
 bot = commands.Bot(command_prefix=get_prefix, case_insensitive=True)
 
 
-cogs = ['cogs.basic','cogs.embed', 'cogs.meme_pic']
+cogs = ['cogs.basic', 'cogs.embed', 'cogs.meme_pic']
+
 
 @bot.event
 async def on_ready():
