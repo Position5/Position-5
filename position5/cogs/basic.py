@@ -12,6 +12,8 @@ class Basic(commands.Cog):
             discord.Game(name="Dota 2"), discord.Streaming(name="Dota 2", url="https://www.twitch.tv/dreamleague"),
             discord.Activity(type=discord.ActivityType.listening, name="Gucci gang"),
             discord.Activity(type=discord.ActivityType.watching, name="DOTA: Dragon's Blood"),
+            discord.Game(name="Dota 2"), discord.Streaming(name="Dota 2", url="https://www.twitch.tv/MiaMalkova"),
+            discord.Activity(type=discord.ActivityType.watching, name="Snyder Cut"),
         ]
         self.change_activity.start()
 
