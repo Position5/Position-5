@@ -1,6 +1,6 @@
+import random
 from discord.ext import commands
 import discord
-import random
 
 # These color constants are taken from discord.js library
 colors = {
@@ -39,6 +39,7 @@ class Embed(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.color_list = list(colors.values())
 
     @commands.command(
         name='embed',
@@ -47,10 +48,10 @@ class Embed(commands.Cog):
     async def embed_command(self, ctx):
 
         # Define a check function that validates the message received by the bot
-        def check(ms):
+        def check(msg):
             # Look for the message sent in the same channel where the command was used
             # As well as by the user who used the command.
-            return ms.channel == ctx.message.channel and ms.author == ctx.message.author
+            return msg.channel == ctx.message.channel and msg.author == ctx.message.author
 
         # First ask the user for the title
         await ctx.send(content='What would you like the title to be?')
@@ -68,14 +69,10 @@ class Embed(commands.Cog):
         # Finally make the embed and send it
         msg = await ctx.send(content='Now generating the embed...')
 
-        color_list = [c for c in colors.values()]
-        # Convert the colors into a list
-        # To be able to use random.choice on it
-
         embed = discord.Embed(
             title=title,
             description=desc,
-            color=random.choice(color_list)
+            color=random.choice(self.color_list)
         )
         # Also set the thumbnail to be the bot's pfp
         embed.set_thumbnail(url=self.bot.user.avatar_url)
@@ -107,12 +104,9 @@ class Embed(commands.Cog):
         # The third parameter comes into play when
         # only one word argument has to be passed by the user
 
-        # Prepare the embed
-
-        color_list = [c for c in colors.values()]
         help_embed = discord.Embed(
             title='Help',
-            color=random.choice(color_list)
+            color=random.choice(self.color_list)
         )
         help_embed.set_thumbnail(url=self.bot.user.avatar_url)
         help_embed.set_footer(
@@ -121,15 +115,15 @@ class Embed(commands.Cog):
         )
 
         # Get a list of all cogs
-        cogs = [c for c in self.bot.cogs.keys()]
+        cogs = list(self.bot.cogs.keys())
 
         # If cog is not specified by the user, we list all cogs and commands
 
         if cog == 'all':
-            for cog in cogs:
+            for cog_t in cogs:
                 # Get a list of all commands under each cog
 
-                cog_commands = self.bot.get_cog(cog).get_commands()
+                cog_commands = self.bot.get_cog(cog_t).get_commands()
                 commands_list = ''
                 for comm in cog_commands:
                     commands_list += f'**{comm.name}** - *{comm.description}*\n'
@@ -137,7 +131,7 @@ class Embed(commands.Cog):
                 # Add the cog's details to the embed.
 
                 help_embed.add_field(
-                    name=cog,
+                    name=cog_t,
                     value=commands_list,
                     inline=False
                 ).add_field(
