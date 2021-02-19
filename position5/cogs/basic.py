@@ -1,13 +1,20 @@
 from datetime import datetime as dt
-from discord.ext import commands
+import random
+from discord.ext import commands, tasks
+import discord
 
 
 class Basic(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.support_activities = [
+            discord.Game(name="Dota 2"), discord.Streaming(name="Dota 2", url="https://www.twitch.tv/dreamleague"),
+            discord.Activity(type=discord.ActivityType.listening, name="Gucci gang"),
+            discord.Activity(type=discord.ActivityType.watching, name="DOTA: Dragon's Blood"),
+        ]
+        self.change_activity.start()
 
-    # Define a new command
     @commands.command(
         name='ping',
         description='The ping command',
@@ -65,6 +72,14 @@ class Basic(commands.Cog):
             await ctx.send(content=f"**{text}**")
 
         return
+
+    @tasks.loop(seconds=10.0)
+    async def change_activity(self):
+        await self.bot.change_presence(activity=random.choice(self.support_activities))
+
+    @change_activity.before_loop
+    async def before_change_activity(self):
+        await self.bot.wait_until_ready()
 
 
 def setup(bot):

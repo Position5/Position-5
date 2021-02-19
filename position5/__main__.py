@@ -35,10 +35,6 @@ async def on_ready():
         bot.load_extension(cog)
 
 
-@bot.command()
-async def helloworld(ctx):
-    await ctx.send('Allo World!')
-
 keep_alive.keep_alive()
 
 bot.run(os.getenv('DISCORD_BOT_TOKEN'), bot=True, reconnect=True)
