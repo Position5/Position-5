@@ -60,7 +60,7 @@ class Basic(commands.Cog):
         # ctx.prefix gives the prefix used while invoking the command
         prefix_used = ctx.prefix
         alias_used = ctx.invoked_with
-        text = msg[len(prefix_used) + len(alias_used):]
+        text = msg[len(prefix_used) + len(alias_used):].strip()
 
         # Next, we check if the user actually passed some text
         if text == '':
