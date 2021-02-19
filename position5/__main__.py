@@ -34,7 +34,7 @@ async def on_ready():
     for cog in cogs:
         bot.load_extension(cog)
 
-
-keep_alive.keep_alive()
+if not os.getenv('LOCAL'):
+    keep_alive.keep_alive()
 
 bot.run(os.getenv('DISCORD_BOT_TOKEN'), bot=True, reconnect=True)

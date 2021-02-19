@@ -111,7 +111,7 @@ class Embed(commands.Cog):
         help_embed.set_thumbnail(url=self.bot.user.avatar_url)
         help_embed.set_footer(
             text=f'Requested by {ctx.message.author.name}',
-            icon_url=self.bot.user.avatar_url
+            icon_url=ctx.message.author.avatar_url
         )
 
         # Get a list of all cogs

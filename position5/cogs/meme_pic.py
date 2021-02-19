@@ -1,7 +1,9 @@
 from os import listdir
 from os.path import isfile, join
+import random
 from discord.ext import commands
 import discord
+from .embed import colors
 
 
 class MemePic(commands.Cog):
@@ -9,6 +11,7 @@ class MemePic(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.emotes = [f for f in listdir('assets/emotes/') if isfile(join('assets/emotes/', f))]
+        self.color_list = list(colors.values())
 
     @commands.command(
         name='xdoubt',
@@ -31,15 +34,19 @@ class MemePic(commands.Cog):
                 await ctx.send(file=discord.File('assets/emotes/' + emote))
         return
 
-    # @commands.command(
-    #     name='emotes',
-    #     description='emotes as pictures',
-    #     usage='<space separated emotes>'
-    # )
-    # async def emote_command(self, ctx, *, emote_list):
-    #     await ctx.message.delete()
-    #     only_files = [f for f in listdir('assets/emotes/') if isfile(join('assets/emotes/', f))]
-    #     return
+    @commands.command(
+        name='emotes',
+        description='sends list of emotes'
+    )
+    async def emotes_command(self, ctx):
+        await ctx.message.delete()
+        embed_msg = discord.Embed(
+            title='Available emotes:',
+            description='\n'.join(['➥ ' + emote.split('.')[0] for emote in self.emotes]),
+            color=random.choice(self.color_list)
+        )
+        await ctx.send(embed=embed_msg)
+        return
 
 
 def setup(bot):
