@@ -1,6 +1,7 @@
 from os import listdir
 from os.path import isfile, join
 import random
+import asyncio
 from discord.ext import commands
 import discord
 from .embed import colors
@@ -40,12 +41,26 @@ class MemePic(commands.Cog):
     )
     async def emotes_command(self, ctx):
         await ctx.message.delete()
-        embed_msg = discord.Embed(
-            title='Available emotes:',
-            description='\n'.join(['➥ ' + emote.split('.')[0] for emote in self.emotes]),
-            color=random.choice(self.color_list)
-        )
-        await ctx.send(embed=embed_msg)
+        title = 'Available emotes:'
+        description = ''
+        embed_list = []
+        for emote in self.emotes:
+            description += '\n➥ ' + emote.split('.')[0]
+            if len(description) > 1996:
+                embed_list.append(ctx.send(embed=discord.Embed(
+                    title=title,
+                    description=description,
+                    color=random.choice(self.color_list)
+                )))
+                description = ''
+        if description != '':
+            embed_list.append(ctx.send(embed=discord.Embed(
+                title=title,
+                description=description,
+                color=random.choice(self.color_list)
+            )))
+        for future in asyncio.as_completed(embed_list):
+            await future
         return
 
 
