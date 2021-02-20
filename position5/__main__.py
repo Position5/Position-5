@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 from discord.ext import commands
-import replit
 import keep_alive
 
 
@@ -22,12 +21,11 @@ def get_prefix(client, message):
 bot = commands.Bot(command_prefix=get_prefix, case_insensitive=True)
 
 
-cogs = ['cogs.basic', 'cogs.embed', 'cogs.meme_pic']
+cogs = ['cogs.basic', 'cogs.embed', 'cogs.meme_pic', 'cogs.cricket']
 
 
 @bot.event
 async def on_ready():
-    replit.clear()
     print('Connected to bot: {}'.format(bot.user.name))
     print('Bot ID: {}'.format(bot.user.id))
     bot.remove_command('help')
