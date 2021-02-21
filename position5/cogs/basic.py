@@ -99,6 +99,16 @@ class Basic(commands.Cog):
         await ctx.send(content=''.join([char_to_emoji(char) for char in text]))
         return
 
+    @commands.command(
+        name='avatar',
+        description='get user avatar',
+        aliases=['av'],
+        usage='user'
+    )
+    async def avatar(self, ctx, *, avamember: discord.Member = None):
+        await ctx.send(avamember.avatar_url if avamember else self.bot.user.avatar_url)
+        return
+
     @tasks.loop(seconds=10.0)
     async def change_activity(self):
         await self.bot.change_presence(activity=random.choice(self.support_activities))

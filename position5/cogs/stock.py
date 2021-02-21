@@ -4,6 +4,7 @@ from aiohttp import ClientSession
 import discord
 import requests
 
+
 def gen_embed_fii(json_data):
     embed = discord.Embed(title=f"FII/DII Data: {json_data[0]['date']}")
     for item in json_data:
@@ -17,6 +18,7 @@ def gen_embed_fii(json_data):
             name='Net Value', value=item['netValue'], inline=True
         )
     return embed
+
 
 class Stock(commands.Cog):
 
