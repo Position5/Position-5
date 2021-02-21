@@ -1,3 +1,4 @@
+from copy import deepcopy
 from discord.ext import commands
 import discord
 
@@ -8,42 +9,42 @@ digit_to_string = {
 }
 
 char_to_emojis = {
-    'a': ['regional_indicator_a', 'a'], # jeans
-    'b': ['regional_indicator_b', 'b'],
-    'c': ['regional_indicator_c', 'copyright', 'waning_crescent_moon'],
-    'd': ['regional_indicator_d'], # leftwards_arrow_with_hook
-    'e': ['regional_indicator_e'], # email
-    'f': ['regional_indicator_f'],
-    'g': ['regional_indicator_g'], # compression
-    'h': ['regional_indicator_h'],
-    'i': ['regional_indicator_i', 'information_source'],
-    'j': ['regional_indicator_j'],
-    'k': ['regional_indicator_k'],
-    'l': ['regional_indicator_l'],
-    'm': ['regional_indicator_m', 'm'],
-    'n': ['regional_indicator_n'],
-    'o': ['regional_indicator_o', 'o2', 'o', 'record_button'], # doughnut, nazar_amulet
-    'p': ['regional_indicator_p', 'parking'],
-    'q': ['regional_indicator_q'],
-    'r': ['regional_indicator_r', 'registered'],
-    's': ['regional_indicator_s', 'heavy_dollar_sign'],
-    't': ['regional_indicator_t'],
-    'u': ['regional_indicator_u', 'ophiuchus'],
-    'v': ['regional_indicator_v'], # v, vs
-    'w': ['regional_indicator_w'], # wc
-    'x': ['regional_indicator_x', 'x', 'negative_squared_cross_mark', 'heavy_multiplication_x'],
-    'y': ['regional_indicator_y'],
-    'z': ['regional_indicator_z'],
-    '0': ['zero'],
-    '1': ['one', 'first_place'],
-    '2': ['two', 'second_place'],
-    '3': ['three', 'third_place'],
-    '4': ['four'],
-    '5': ['five'],
-    '6': ['six'],
-    '7': ['seven'],
-    '8': ['eight', '8ball'],
-    '9': ['nine'],
+    'a': ['\U0001f1e6', '\U0001f170'], # jeans
+    'b': ['\U0001f1e7', '\U0001f171'],
+    'c': ['\U0001f1e8', '\U000000a9', '\U0001f318'],
+    'd': ['\U0001f1e9'], # leftwards_arrow_with_hook
+    'e': ['\U0001f1ea', '\U0001f4e7'],
+    'f': ['\U0001f1eb'],
+    'g': ['\U0001f1ec'], # compression
+    'h': ['\U0001f1ed', '\U00002653'],
+    'i': ['\U0001f1ee', '\U00002139'],
+    'j': ['\U0001f1ef'],
+    'k': ['\U0001f1f0'],
+    'l': ['\U0001f1f1'],
+    'm': ['\U0001f1f2', '\U000024c2', '\U0000264f'],
+    'n': ['\U0001f1f3'],
+    'o': ['\U0001f1f4', '\U0001f17e', '\U00002b55'], # record_button, doughnut, nazar_amulet
+    'p': ['\U0001f1f5', '\U0001f17f'],
+    'q': ['\U0001f1f6'],
+    'r': ['\U0001f1f7', '\U000000ae'],
+    's': ['\U0001f1f8', '\U0001f4b2'],
+    't': ['\U0001f1f9'],
+    'u': ['\U0001f1fa', '\U000026ce'],
+    'v': ['\U0001f1fb'], # v, vs
+    'w': ['\U0001f1fc'], # wc
+    'x': ['\U0001f1fd', '\U0000274c', '\U0000274e', '\U00002716'],
+    'y': ['\U0001f1fe'],
+    'z': ['\U0001f1ff'],
+    '0': ['\U00000030'],
+    '1': ['\U00000031', '\U0001f947'],
+    '2': ['\U00000032', '\U0001f948'],
+    '3': ['\U00000033', '\U0001f949'],
+    '4': ['\U00000034'],
+    '5': ['\U00000035'],
+    '6': ['\U00000036'],
+    '7': ['\U00000037'],
+    '8': ['\U00000038', '\U0001f3b1'],
+    '9': ['\U00000039'],
 }
 
 
@@ -99,9 +100,14 @@ class React(commands.Cog):
         aliases=['pre']
     )
     async def previous(self, ctx, *, text: str = None):
-        # last_message = await ctx.channel.history(limit=2).flatten()
+        last_message = await ctx.channel.history(limit=2).flatten()
+        local_emojis = deepcopy(char_to_emojis)
         await ctx.message.delete()
-        print(text)
+        for char in text.lower():
+            if char in local_emojis and local_emojis[char]:
+                await last_message[-1].add_reaction(local_emojis[char].pop(0))
+            else:
+                break
         return
 
 
