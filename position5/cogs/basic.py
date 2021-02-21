@@ -4,20 +4,6 @@ from discord.ext import commands, tasks
 import discord
 
 
-digit_to_string = {
-    1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
-    6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 0: 'zero'
-}
-
-
-def char_to_emoji(char):
-    if char.isalpha():
-        return f':regional_indicator_{char.lower()}: '
-    if char.isdigit():
-        return f':{digit_to_string[int(char)]}: '
-    return char
-
-
 class Basic(commands.Cog):
 
     def __init__(self, bot):
@@ -87,26 +73,6 @@ class Basic(commands.Cog):
             # User specified the text.
             await ctx.send(content=text)
 
-        return
-
-    @commands.command(
-        name='alpha',
-        description='say with alphabets',
-        usage='<text>'
-    )
-    async def alpha_command(self, ctx, *, text):
-        await ctx.message.delete()
-        await ctx.send(content=''.join([char_to_emoji(char) for char in text]))
-        return
-
-    @commands.command(
-        name='avatar',
-        description='get user avatar',
-        aliases=['av'],
-        usage='user'
-    )
-    async def avatar(self, ctx, *, avamember: discord.Member = None):
-        await ctx.send(avamember.avatar_url if avamember else self.bot.user.avatar_url)
         return
 
     @tasks.loop(seconds=10.0)

@@ -21,7 +21,7 @@ def get_prefix(client, message):
 bot = commands.Bot(command_prefix=get_prefix, case_insensitive=True)
 
 
-cogs = ['cogs.basic', 'cogs.embed', 'cogs.meme_pic', 'cogs.cricket', 'cogs.stock']
+cogs = ['cogs.basic', 'cogs.embed', 'cogs.meme_pic', 'cogs.cricket', 'cogs.stock', 'cogs.react']
 
 
 @bot.event
