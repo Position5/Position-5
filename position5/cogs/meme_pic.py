@@ -37,14 +37,17 @@ class MemePic(commands.Cog):
 
     @commands.command(
         name='emotes',
-        description='sends list of emotes'
+        description='sends list of emotes',
+        usage='<search_string>'
     )
-    async def emotes_command(self, ctx):
+    async def emotes_command(self, ctx, *, search: str = None):
         await ctx.message.delete()
-        title = 'Available emotes:'
+        title = f'Available emotes({search}):' if search else 'Available emotes:'
         description = ''
         embed_list = []
         for emote in self.emotes:
+            if search and search.lower() not in emote.lower():
+                continue
             description += '\n➥ ' + emote.split('.')[0]
             if len(description) > 1996:
                 embed_list.append(ctx.send(embed=discord.Embed(
