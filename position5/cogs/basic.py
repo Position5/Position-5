@@ -4,6 +4,17 @@ from discord.ext import commands, tasks
 import discord
 
 
+DISCLAIMER = '''
+I am NOT a SEBI registered advisor or a financial adviser.
+
+Any post associated with this IP is satire and should be treated as such. At no point has anyone associated with this IP ever condoned, encouraged, committed or abated acts of violence or threats of violence against any persons, regardless of racial, ethnic, religious or cultural background.
+
+In case of an investigation by any federal entity or similar, I do not have any involvement with this group or with the people in it, I do not know how I am here, probably added by a third party, I do not support any actions by the member of this group.
+
+Any of my investment or trades I share here are provided for educational purposes only and do not constitute specific financial, trading or investment advice. The statements are intended to provide educational information only and do not attempt to give you advice that relates to your specific circumstances. You should discuss your specific requirements and situation with a qualified financial adviser. I do share details and numbers available in the public domain for any company or on the websites of NSE, BSE, YahooFinance and TradingView.
+'''
+
+
 class Basic(commands.Cog):
 
     def __init__(self, bot):
@@ -74,6 +85,13 @@ class Basic(commands.Cog):
             await ctx.send(content=text)
 
         return
+
+    @commands.command(
+        name='disclaimer',
+        description='disclaimer',
+    )
+    async def disclaimer(self, ctx):
+        await ctx.send(content=DISCLAIMER)
 
     @tasks.loop(seconds=10.0)
     async def change_activity(self):
