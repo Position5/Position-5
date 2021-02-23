@@ -84,28 +84,45 @@ class React(commands.Cog):
     @commands.command(
         name='react',
         description='react to previous message with emoji',
-        usage='<emoji>',
+        usage='-index(optional: <9) <emoji>',
         aliases=['re']
     )
     async def react_command(self, ctx, *, emoji: str = None):
-        last_message = await ctx.channel.history(limit=2).flatten()
+        index = 1
+        if emoji.startswith('-') and ' ' in emoji:
+            _index, emoji = emoji.split(' ', 1)
+            _index = _index[1:]
+            if _index.isdigit():
+                index = min(9, int(_index))
+
+        last_message = await ctx.channel.history(limit=index + 1).flatten()
         await ctx.message.delete()
-        await last_message[-1].add_reaction(emoji)
+        await last_message[index].add_reaction(emoji)
         return
 
     @commands.command(
         name='previous',
         description='react to previous message with emojis(text)',
-        usage='<text>',
+        usage='-index(optional: <9) <text>',
         aliases=['pre']
     )
     async def previous(self, ctx, *, text: str = None):
-        last_message = await ctx.channel.history(limit=2).flatten()
+        index = 1
+        if text.startswith('-') and ' ' in text:
+            _index, text = text.split(' ', 1)
+            _index = _index[1:]
+            if _index.isdigit():
+                index = min(9, int(_index))
+
+        last_message = await ctx.channel.history(limit=index + 1).flatten()
         local_emojis = deepcopy(char_to_emojis)
         await ctx.message.delete()
+
         for char in text.lower():
             if char in local_emojis and local_emojis[char]:
-                await last_message[-1].add_reaction(local_emojis[char].pop(0))
+                await last_message[index].add_reaction(local_emojis[char].pop(0))
+            elif char == ' ':
+                continue
             else:
                 break
         return
