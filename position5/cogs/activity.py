@@ -25,7 +25,7 @@ class Activity(commands.Cog):
                     embed = discord.Embed(
                         title=f"{user.name}'s Spotify",
                         description="Listening to {}".format(activity.title),
-                        color=0xC902FF)
+                        color=activity.color)
                     embed.set_thumbnail(url=activity.album_cover_url)
                     embed.add_field(name="Artist", value=activity.artist)
                     embed.add_field(name="Album", value=activity.album)
@@ -46,7 +46,7 @@ class Activity(commands.Cog):
                     embed.set_footer(text=f"Streaming at {activity.url}")
                     await ctx.send(embed=embed)
                 elif isinstance(activity, discord.activity.CustomActivity):
-                    await ctx.send(content=f'Status: {activity.emoji} {activity.name}')
+                    await ctx.send(content=f'Status: {activity.emoji or ""} {activity.name}')
                 else:
                     print(type(activity))
                     await ctx.send(content=str(activity))

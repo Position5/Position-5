@@ -2,13 +2,7 @@ from copy import deepcopy
 from discord.ext import commands
 import discord
 
-
-digit_to_string = {
-    1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
-    6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 0: 'zero'
-}
-
-char_to_emojis = {
+emojis_dict = {
     'a': ['\U0001f1e6', '\U0001f170'], # jeans
     'b': ['\U0001f1e7', '\U0001f171'],
     'c': ['\U0001f1e8', '\U000000a9', '\U0001f318'],
@@ -35,24 +29,22 @@ char_to_emojis = {
     'x': ['\U0001f1fd', '\U0000274c', '\U0000274e', '\U00002716'],
     'y': ['\U0001f1fe'],
     'z': ['\U0001f1ff'],
-    '0': ['\U00000030'],
-    '1': ['\U00000031', '\U0001f947'],
-    '2': ['\U00000032', '\U0001f948'],
-    '3': ['\U00000033', '\U0001f949'],
-    '4': ['\U00000034'],
-    '5': ['\U00000035'],
-    '6': ['\U00000036'],
-    '7': ['\U00000037'],
-    '8': ['\U00000038', '\U0001f3b1'],
-    '9': ['\U00000039'],
+    '0': ['0\U000020E3'],
+    '1': ['1\U000020E3', '\U0001f947'],
+    '2': ['2\U000020E3', '\U0001f948'],
+    '3': ['3\U000020E3', '\U0001f949'],
+    '4': ['4\U000020E3'],
+    '5': ['5\U000020E3'],
+    '6': ['6\U000020E3'],
+    '7': ['7\U000020E3'],
+    '8': ['8\U000020E3', '\U0001f3b1'],
+    '9': ['9\U000020E3'],
 }
 
 
 def char_to_emoji(char):
-    if char.isalpha():
-        return f':regional_indicator_{char.lower()}: '
-    if char.isdigit():
-        return f':{digit_to_string[int(char)]}: '
+    if char.lower() in emojis_dict:
+        return emojis_dict[char.lower()][0] + ' '
     return char
 
 
@@ -68,7 +60,7 @@ class React(commands.Cog):
     )
     async def alpha_command(self, ctx, *, text):
         await ctx.message.delete()
-        await ctx.send(content=''.join([char_to_emoji(char) for char in text]))
+        await ctx.send(content=(''.join([char_to_emoji(char) for char in text])))
         return
 
     @commands.command(
@@ -101,6 +93,20 @@ class React(commands.Cog):
         return
 
     @commands.command(
+        name='clear',
+        description='clear reactions from a message',
+        usage='-index',
+        aliases=['cls']
+    )
+    @commands.has_permissions(manage_messages=True)
+    async def clear_reactions_command(self, ctx, *, index: int = 1):
+        index = min(abs(index), 9)
+        last_message = await ctx.channel.history(limit=index + 1).flatten()
+        await ctx.message.delete()
+        await last_message[index].clear_reactions()
+        return
+
+    @commands.command(
         name='previous',
         description='react to previous message with emojis(text)',
         usage='-index(optional: <9) <text>',
@@ -115,7 +121,7 @@ class React(commands.Cog):
                 index = min(9, int(_index))
 
         last_message = await ctx.channel.history(limit=index + 1).flatten()
-        local_emojis = deepcopy(char_to_emojis)
+        local_emojis = deepcopy(emojis_dict)
         await ctx.message.delete()
 
         for char in text.lower():

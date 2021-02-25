@@ -45,9 +45,11 @@ class MemePic(commands.Cog):
         title = f'Available emotes({search}):' if search else 'Available emotes:'
         description = ''
         embed_list = []
+        search_not_found = True
         for emote in self.emotes:
             if search and search.lower() not in emote.lower():
                 continue
+            search_not_found = False
             description += '\n➥ ' + emote.split('.')[0]
             if len(description) > 1996:
                 embed_list.append(ctx.send(embed=discord.Embed(
@@ -64,6 +66,12 @@ class MemePic(commands.Cog):
             )))
         for future in asyncio.as_completed(embed_list):
             await future
+        if description =='' and search and search_not_found:
+            await ctx.send(embed=discord.Embed(
+                title=title,
+                description='No emotes found',
+                color=random.choice(self.color_list)
+            ))
         return
 
 
