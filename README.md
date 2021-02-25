@@ -7,6 +7,7 @@ Dedicated to best position 5 support.
 - Install Python 3.5+
 - Install pip packages: `pip install -r requirements.txt`
 - Create a `.env` file in this directory, and place token `DISCORD_BOT_TOKEN=token-goes-here`
+	and place cricapi token `CRIC_API=token-goes-here`
 - Run `python position5`
 
 ### Linting
