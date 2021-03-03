@@ -48,8 +48,7 @@ class Activity(commands.Cog):
                 elif isinstance(activity, discord.activity.CustomActivity):
                     await ctx.send(content=f'Status: {activity.emoji or ""} {activity.name}')
                 else:
-                    print(type(activity))
-                    await ctx.send(content=str(activity))
+                    await ctx.send(content=f'{activity.type.name.title()} {activity.name}')
 
 
 def setup(bot):
