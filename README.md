@@ -1,5 +1,7 @@
 # Position-5
 
+[![Pylint](https://github.com/appi147/Position-5/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/appi147/Position-5/actions/workflows/pylint.yml)
+
 Dedicated to best position 5 support.
 
 ## Setting Up
