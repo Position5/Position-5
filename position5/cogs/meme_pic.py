@@ -66,7 +66,7 @@ class MemePic(commands.Cog):
             )))
         for future in asyncio.as_completed(embed_list):
             await future
-        if description =='' and search and search_not_found:
+        if description == '' and search and search_not_found:
             await ctx.send(embed=discord.Embed(
                 title=title,
                 description='No emotes found',

@@ -2,7 +2,6 @@ import os
 from discord.ext import commands
 import discord
 from cricapi import Cricapi
-from requests import __title__
 
 
 class Cricket(commands.Cog):
@@ -18,6 +17,8 @@ class Cricket(commands.Cog):
     async def cricket_command(self, ctx):
         def check(msg):
             return msg.channel == ctx.message.channel and msg.author == ctx.message.author
+
+        await ctx.message.delete()
 
         msg_og = await ctx.send(embed=discord.Embed(
             title='Fetching matches',
@@ -39,11 +40,12 @@ class Cricket(commands.Cog):
 
         msg = await self.bot.wait_for('message', check=check)
         reply = msg.content.strip()
+        await msg.delete()
 
         if reply in history:
             scores = self.cricket.cricketScore({'unique_id': history[reply]})
             response = discord.Embed(
-                title=scores['score'].replace('&amp;', '&')
+                title=scores['score'].replace('&amp;', '&') if 'score' in scores else 'Score not found'
             ).set_thumbnail(
                 url=self.bot.user.avatar_url
             ).set_footer(

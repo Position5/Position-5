@@ -87,10 +87,6 @@ class Embed(commands.Cog):
             embed=embed,
             content=None
         )
-        # Editing the message
-        # We have to specify the content to be 'None' here
-        # Since we don't want it to stay to 'Now generating embed...'
-
         return
 
     @commands.command(
@@ -134,13 +130,10 @@ class Embed(commands.Cog):
                     name=cog_t,
                     value=commands_list,
                     inline=False
-                ).add_field(
-                    name='\u200b', value='\u200b', inline=False
                 )
         else:
 
             # If the cog was specified
-
             lower_cogs = [c.lower() for c in cogs]
 
             # If the cog actually exists.

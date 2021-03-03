@@ -70,7 +70,8 @@ class React(commands.Cog):
         usage='user'
     )
     async def avatar(self, ctx, *, avamember: discord.Member = None):
-        await ctx.send(avamember.avatar_url if avamember else self.bot.user.avatar_url)
+        await ctx.message.delete()
+        await ctx.send(avamember.avatar_url if avamember else ctx.author.avatar_url)
         return
 
     @commands.command(

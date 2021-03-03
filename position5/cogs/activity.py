@@ -16,6 +16,8 @@ class Activity(commands.Cog):
 
     )
     async def activity(self, ctx, user: discord.Member = None):
+        await ctx.message.delete()
+
         if user is None:
             user = ctx.author
 
