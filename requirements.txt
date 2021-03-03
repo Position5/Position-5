@@ -1,4 +1,5 @@
-discord.py
-flask
-python-dotenv
 cricapi
+discord.py
+flake8
+pylint
+python-dotenv

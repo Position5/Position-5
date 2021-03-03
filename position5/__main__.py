@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 import discord
-import keep_alive
 
 
 load_dotenv('.env')
@@ -32,8 +31,5 @@ async def on_ready():
     bot.remove_command('help')
     for cog in cogs:
         bot.load_extension(cog)
-
-if not os.getenv('LOCAL'):
-    keep_alive.keep_alive()
 
 bot.run(os.getenv('DISCORD_BOT_TOKEN'), bot=True, reconnect=True)
