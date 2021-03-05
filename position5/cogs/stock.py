@@ -3,6 +3,7 @@ from discord.ext import commands
 from aiohttp import ClientSession
 import discord
 import requests
+from . import DISCLAIMER, WHY_NIFTY
 
 
 def gen_embed_fii(json_data):
@@ -65,6 +66,25 @@ class Stock(commands.Cog):
             return
         await ctx.send(embed=gen_embed_fii(json_data))
         return
+
+    @commands.command(
+        name='disclaimer',
+        description='disclaimer',
+    )
+    async def disclaimer(self, ctx):
+        await ctx.message.delete()
+        await ctx.send(content=DISCLAIMER)
+
+    @commands.command(
+        name='nifty',
+        description='Why NIFTY'
+    )
+    async def nifty(self, ctx):
+        await ctx.message.delete()
+        await ctx.send(embed=discord.Embed(
+            title='Why trading in NIFTY makes sense?',
+            description=WHY_NIFTY
+        ))
 
 
 def setup(bot):

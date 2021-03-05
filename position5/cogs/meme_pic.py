@@ -4,7 +4,7 @@ import random
 import asyncio
 from discord.ext import commands
 import discord
-from .embed import colors
+from . import COLORS as colors
 
 
 class MemePic(commands.Cog):
