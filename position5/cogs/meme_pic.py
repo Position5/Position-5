@@ -17,7 +17,7 @@ class MemePic(commands.Cog):
 
     def _refresh_emotes(self):
         self.emotes = [f.name for f in sorted(Path(EMOTES_PATH).iterdir(), key=getmtime) if isfile(f)]
-        self.emotes_lower = [emote.split('.', 1)[0].lower() for emote in self.emotes]
+        self.emotes_dict = {emote.split('.', 1)[0].lower(): emote for emote in self.emotes}
 
     @commands.command(
         name='xdoubt',
@@ -33,11 +33,10 @@ class MemePic(commands.Cog):
         description='emote as pictures',
         usage='<emote>'
     )
-    async def emote_command(self, ctx, *, name):
+    async def emote_command(self, ctx, *, emote_name: str):
         await ctx.message.delete()
-        for emote in self.emotes:
-            if name.lower() in self.emotes_lower:
-                await ctx.send(file=discord.File(EMOTES_PATH + emote))
+        if emote_name.lower() in self.emotes_dict:
+            await ctx.send(file=discord.File(EMOTES_PATH + self.emotes_dict[emote_name.lower()]))
         return
 
     @commands.command(
