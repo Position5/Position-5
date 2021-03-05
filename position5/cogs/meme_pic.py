@@ -1,18 +1,23 @@
-from os import listdir
-from os.path import isfile, join
+from os.path import isfile, getmtime
+from pathlib import Path
 import random
-import asyncio
 from discord.ext import commands
 import discord
 from . import COLORS as colors
+
+EMOTES_PATH = 'assets/emotes/'
 
 
 class MemePic(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.emotes = [f for f in listdir('assets/emotes/') if isfile(join('assets/emotes/', f))]
+        self._refresh_emotes()
         self.color_list = list(colors.values())
+
+    def _refresh_emotes(self):
+        self.emotes = [f.name for f in sorted(Path(EMOTES_PATH).iterdir(), key=getmtime) if isfile(f)]
+        self.emotes_lower = [emote.split('.', 1)[0].lower() for emote in self.emotes]
 
     @commands.command(
         name='xdoubt',
@@ -31,8 +36,17 @@ class MemePic(commands.Cog):
     async def emote_command(self, ctx, *, name):
         await ctx.message.delete()
         for emote in self.emotes:
-            if name.lower() == emote.split('.', 1)[0].lower():
-                await ctx.send(file=discord.File('assets/emotes/' + emote))
+            if name.lower() in self.emotes_lower:
+                await ctx.send(file=discord.File(EMOTES_PATH + emote))
+        return
+
+    @commands.command(
+        name='refresh',
+        description='refresh emotes list'
+    )
+    async def refresh_emotes(self, ctx):
+        await ctx.message.delete()
+        self._refresh_emotes()
         return
 
     @commands.command(
@@ -52,20 +66,18 @@ class MemePic(commands.Cog):
             search_not_found = False
             description += '\n➥ ' + emote.split('.')[0]
             if len(description) > 1996:
-                embed_list.append(ctx.send(embed=discord.Embed(
-                    title=title,
-                    description=description,
-                    color=random.choice(self.color_list)
-                )))
+                embed_list.append((title, description))
                 description = ''
         if description != '':
-            embed_list.append(ctx.send(embed=discord.Embed(
-                title=title,
+            embed_list.append((title, description))
+        for count, (title, description) in enumerate(embed_list):
+            await ctx.send(embed=discord.Embed(
+                title=f'{title} [{count}]',
                 description=description,
                 color=random.choice(self.color_list)
-            )))
-        for future in asyncio.as_completed(embed_list):
-            await future
+            ))
+
+        # if no emotes found
         if description == '' and search and search_not_found:
             await ctx.send(embed=discord.Embed(
                 title=title,
