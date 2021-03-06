@@ -69,9 +69,11 @@ class MemePic(commands.Cog):
                 description = ''
         if description != '':
             embed_list.append((title, description))
-        for count, (title, description) in enumerate(embed_list):
+
+        total_count = len(embed_list)
+        for count, (title, description) in enumerate(embed_list, 1):
             await ctx.send(embed=discord.Embed(
-                title=f'{title} [{count}]',
+                title=f'{title} [{count}/{total_count}]',
                 description=description,
                 color=random.choice(self.color_list)
             ))
