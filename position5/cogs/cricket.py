@@ -12,7 +12,8 @@ class Cricket(commands.Cog):
 
     @commands.command(
         name='cricket',
-        description='cricket commands'
+        description='cricket commands',
+        aliases=['cric']
     )
     async def cricket_command(self, ctx):
         def check(msg):
@@ -22,6 +23,7 @@ class Cricket(commands.Cog):
 
         msg_og = await ctx.send(embed=discord.Embed(
             title='Fetching matches',
+            color=discord.Color.random(),
         ).set_thumbnail(
             url=self.bot.user.avatar_url
         ).set_footer(
@@ -36,7 +38,11 @@ class Cricket(commands.Cog):
             desc += f"\n{count}. {match['team-1']} vs {match['team-2']}"
             history[str(count)] = match['unique_id']
         desc += '\nReply with `<num>` for details'
-        await msg_og.edit(embed=discord.Embed(title='Live cricket matches', description=desc))
+        await msg_og.edit(embed=discord.Embed(
+            title='Live cricket matches',
+            description=desc[:2048],
+            color=discord.Color.random()
+        ))
 
         msg = await self.bot.wait_for('message', check=check)
         reply = msg.content.strip()
@@ -45,7 +51,8 @@ class Cricket(commands.Cog):
         if reply in history:
             scores = self.cricket.cricketScore({'unique_id': history[reply]})
             response = discord.Embed(
-                title=scores['score'].replace('&amp;', '&') if 'score' in scores else 'Score not found'
+                title=scores['score'].replace('&amp;', '&') if 'score' in scores else 'Score not found',
+                color=discord.Color.random()
             ).set_thumbnail(
                 url=self.bot.user.avatar_url
             ).set_footer(

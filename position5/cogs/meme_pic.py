@@ -1,9 +1,7 @@
 from os.path import isfile, getmtime
 from pathlib import Path
-import random
 from discord.ext import commands
 import discord
-from . import COLORS as colors
 
 EMOTES_PATH = 'assets/emotes/'
 
@@ -13,7 +11,6 @@ class MemePic(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._refresh_emotes()
-        self.color_list = list(colors.values())
 
     def _refresh_emotes(self):
         self.emotes = [f.name for f in sorted(Path(EMOTES_PATH).iterdir(), key=getmtime) if isfile(f)]
@@ -75,7 +72,7 @@ class MemePic(commands.Cog):
             await ctx.send(embed=discord.Embed(
                 title=f'{title} [{count}/{total_count}]',
                 description=description,
-                color=random.choice(self.color_list)
+                color=discord.Color.random()
             ))
 
         # if no emotes found
@@ -83,7 +80,7 @@ class MemePic(commands.Cog):
             await ctx.send(embed=discord.Embed(
                 title=title,
                 description='No emotes found',
-                color=random.choice(self.color_list)
+                color=discord.Color.random()
             ))
         return
 

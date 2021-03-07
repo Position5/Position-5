@@ -1,14 +1,11 @@
-import random
 from discord.ext import commands
 import discord
-from . import COLORS as colors
 
 
 class Embed(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.color_list = list(colors.values())
 
     @commands.command(
         name='embed',
@@ -41,7 +38,7 @@ class Embed(commands.Cog):
         embed = discord.Embed(
             title=title,
             description=desc,
-            color=random.choice(self.color_list)
+            color=discord.Color.random()
         )
         # Also set the thumbnail to be the bot's pfp
         embed.set_thumbnail(url=self.bot.user.avatar_url)
@@ -71,7 +68,7 @@ class Embed(commands.Cog):
 
         help_embed = discord.Embed(
             title='Help',
-            color=random.choice(self.color_list)
+            color=discord.Color.random()
         )
         help_embed.set_thumbnail(url=self.bot.user.avatar_url)
         help_embed.set_footer(

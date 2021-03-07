@@ -37,14 +37,14 @@ class Activity(commands.Cog):
                     embed = discord.Embed(
                         title=f"{user.name}'s Game",
                         description="Playing {}".format(activity.name),
-                        color=0xC902FF)
+                        color=discord.Color.random())
                     embed.set_footer(text=f"Game started at {(activity.start + td(hours=5, minutes=30)).strftime('%H:%M:%S')}")
                     await ctx.send(embed=embed)
                 elif isinstance(activity, discord.activity.Streaming):
                     embed = discord.Embed(
                         title=f"{user.name}'s Stream",
                         description=f"Streaming {activity.name}",
-                        color=0xC902FF)
+                        color=discord.Color.random())
                     embed.set_footer(text=f"Streaming at {activity.url}")
                     await ctx.send(embed=embed)
                 elif isinstance(activity, discord.activity.CustomActivity):

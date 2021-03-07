@@ -83,7 +83,8 @@ class Stock(commands.Cog):
         await ctx.message.delete()
         await ctx.send(embed=discord.Embed(
             title='Why trading in NIFTY makes sense?',
-            description=WHY_NIFTY
+            description=WHY_NIFTY,
+            color=discord.Color.gold()
         ))
 
 
