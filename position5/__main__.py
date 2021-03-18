@@ -21,7 +21,10 @@ def get_prefix(client, message):
 bot = commands.Bot(command_prefix=get_prefix, case_insensitive=True, intents=discord.Intents().all())
 
 
-cogs = ['cogs.basic', 'cogs.embed', 'cogs.meme_pic', 'cogs.cricket', 'cogs.stock', 'cogs.react', 'cogs.activity']
+cogs = [
+    'cogs.basic', 'cogs.embed', 'cogs.meme_pic', 'cogs.cricket', 'cogs.stock', 'cogs.react',
+    'cogs.activity', 'cogs.poll'
+]
 
 
 @bot.event
