@@ -5,24 +5,21 @@ import discord
 
 
 class Basic(commands.Cog):
-
     def __init__(self, bot):
         self.bot = bot
         self.support_activities = [
             discord.Game(name="Dota 2"),
             discord.Streaming(name="Dota 2", url="https://www.twitch.tv/dreamleague"),
             discord.Activity(type=discord.ActivityType.listening, name="Gucci gang"),
-            discord.Activity(type=discord.ActivityType.watching, name="DOTA: Dragon's Blood"),
+            discord.Activity(
+                type=discord.ActivityType.watching, name="DOTA: Dragon's Blood"
+            ),
             discord.Streaming(name="Dota 2", url="https://www.twitch.tv/MiaMalkova"),
             discord.Activity(type=discord.ActivityType.watching, name="Snyder Cut"),
         ]
         self.change_activity.start()
 
-    @commands.command(
-        name='ping',
-        description='The ping command',
-        aliases=['p']
-    )
+    @commands.command(name='ping', description='The ping command', aliases=['p'])
     async def ping_command(self, ctx):
         start = dt.timestamp(dt.now())
         # Gets the timestamp when the command was used
@@ -31,7 +28,9 @@ class Basic(commands.Cog):
         # Sends a message to the user in the channel the message with the command was received.
         # Notifies the user that pinging has started
 
-        await msg.edit(content=f'Pong!\nOne message round-trip took {(dt.timestamp(dt.now())-start) * 1000}ms.')
+        await msg.edit(
+            content=f'Pong!\nOne message round-trip took {(dt.timestamp(dt.now())-start) * 1000}ms.'
+        )
         # Ping completed and round-trip duration show in ms
         # Since it takes a while to send the messages, it will calculate how much time it takes to edit an message.
         # It depends usually on your internet connection speed
@@ -42,7 +41,7 @@ class Basic(commands.Cog):
         name='say',
         description='The say command',
         aliases=['repeat', 'parrot'],
-        usage='<text>'
+        usage='<text>',
     )
     async def say_command(self, ctx):
         # The 'usage' only needs to show the parameters
@@ -63,7 +62,7 @@ class Basic(commands.Cog):
         # ctx.prefix gives the prefix used while invoking the command
         prefix_used = ctx.prefix
         alias_used = ctx.invoked_with
-        text = msg[len(prefix_used) + len(alias_used):].strip()
+        text = msg[len(prefix_used) + len(alias_used) :].strip()
 
         # Next, we check if the user actually passed some text
         if text == '':

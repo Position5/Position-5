@@ -11,25 +11,17 @@ def char_to_emoji(char):
 
 
 class React(commands.Cog):
-
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(
-        name='alpha',
-        description='say with alphabets',
-        usage='<text>'
-    )
+    @commands.command(name='alpha', description='say with alphabets', usage='<text>')
     async def alpha_command(self, ctx, *, text):
         await ctx.message.delete()
         await ctx.send(content=(''.join([char_to_emoji(char) for char in text])))
         return
 
     @commands.command(
-        name='avatar',
-        description='get user avatar',
-        aliases=['av'],
-        usage='user'
+        name='avatar', description='get user avatar', aliases=['av'], usage='user'
     )
     async def avatar(self, ctx, *, avamember: discord.Member = None):
         await ctx.message.delete()
@@ -40,7 +32,7 @@ class React(commands.Cog):
         name='react',
         description='react to previous message with emoji',
         usage='-index(optional: <9) <emoji>',
-        aliases=['re']
+        aliases=['re'],
     )
     async def react_command(self, ctx, *, emoji: str = None):
         index = 1
@@ -59,7 +51,7 @@ class React(commands.Cog):
         name='clear',
         description='clear reactions from a message',
         usage='-index',
-        aliases=['cls']
+        aliases=['cls'],
     )
     @commands.has_permissions(manage_messages=True)
     async def clear_reactions_command(self, ctx, *, index: int = 1):
@@ -73,7 +65,7 @@ class React(commands.Cog):
         name='previous',
         description='react to previous message with emojis(text)',
         usage='-index(optional: <9) <text>',
-        aliases=['pre']
+        aliases=['pre'],
     )
     async def previous(self, ctx, *, text: str = None):
         index = 1

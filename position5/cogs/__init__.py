@@ -23,13 +23,13 @@ WHY_NIFTY = '''
 '''
 
 EMOJIS_DICT = {
-    'a': ['\U0001f1e6', '\U0001f170'], # jeans
+    'a': ['\U0001f1e6', '\U0001f170'],  # jeans
     'b': ['\U0001f1e7', '\U0001f171'],
     'c': ['\U0001f1e8', '\U000000a9', '\U0001f318'],
-    'd': ['\U0001f1e9'], # leftwards_arrow_with_hook
+    'd': ['\U0001f1e9'],  # leftwards_arrow_with_hook
     'e': ['\U0001f1ea', '\U0001f4e7'],
     'f': ['\U0001f1eb'],
-    'g': ['\U0001f1ec'], # compression
+    'g': ['\U0001f1ec'],  # compression
     'h': ['\U0001f1ed', '\U00002653'],
     'i': ['\U0001f1ee', '\U00002139'],
     'j': ['\U0001f1ef'],
@@ -37,15 +37,19 @@ EMOJIS_DICT = {
     'l': ['\U0001f1f1'],
     'm': ['\U0001f1f2', '\U000024c2', '\U0000264f'],
     'n': ['\U0001f1f3'],
-    'o': ['\U0001f1f4', '\U0001f17e', '\U00002b55'], # record_button, doughnut, nazar_amulet
+    'o': [
+        '\U0001f1f4',
+        '\U0001f17e',
+        '\U00002b55',
+    ],  # record_button, doughnut, nazar_amulet
     'p': ['\U0001f1f5', '\U0001f17f'],
     'q': ['\U0001f1f6'],
     'r': ['\U0001f1f7', '\U000000ae'],
     's': ['\U0001f1f8', '\U0001f4b2'],
     't': ['\U0001f1f9'],
     'u': ['\U0001f1fa', '\U000026ce'],
-    'v': ['\U0001f1fb'], # v, vs
-    'w': ['\U0001f1fc'], # wc
+    'v': ['\U0001f1fb'],  # v, vs
+    'w': ['\U0001f1fc'],  # wc
     'x': ['\U0001f1fd', '\U0000274c', '\U0000274e', '\U00002716'],
     'y': ['\U0001f1fe'],
     'z': ['\U0001f1ff'],

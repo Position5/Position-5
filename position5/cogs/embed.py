@@ -3,7 +3,6 @@ import discord
 
 
 class Embed(commands.Cog):
-
     def __init__(self, bot):
         self.bot = bot
 
@@ -17,7 +16,9 @@ class Embed(commands.Cog):
         def check(msg):
             # Look for the message sent in the same channel where the command was used
             # As well as by the user who used the command.
-            return msg.channel == ctx.message.channel and msg.author == ctx.message.author
+            return (
+                msg.channel == ctx.message.channel and msg.author == ctx.message.author
+            )
 
         # First ask the user for the title
         await ctx.send(content='What would you like the title to be?')
@@ -36,44 +37,35 @@ class Embed(commands.Cog):
         msg = await ctx.send(content='Now generating the embed...')
 
         embed = discord.Embed(
-            title=title,
-            description=desc,
-            color=discord.Color.random()
+            title=title, description=desc, color=discord.Color.random()
         )
         # Also set the thumbnail to be the bot's pfp
         embed.set_thumbnail(url=self.bot.user.avatar_url)
 
         # Also set the embed author to the command user
         embed.set_author(
-            name=ctx.message.author.name,
-            icon_url=ctx.message.author.avatar_url
+            name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url
         )
 
-        await msg.edit(
-            embed=embed,
-            content=None
-        )
+        await msg.edit(embed=embed, content=None)
         return
 
     @commands.command(
         name='help',
         description='The help command!',
         aliases=['commands', 'command'],
-        usage='cog'
+        usage='cog',
     )
     async def help_command(self, ctx, cog='all'):
 
         # The third parameter comes into play when
         # only one word argument has to be passed by the user
 
-        help_embed = discord.Embed(
-            title='Help',
-            color=discord.Color.random()
-        )
+        help_embed = discord.Embed(title='Help', color=discord.Color.random())
         help_embed.set_thumbnail(url=self.bot.user.avatar_url)
         help_embed.set_footer(
             text=f'Requested by {ctx.message.author.name}',
-            icon_url=ctx.message.author.avatar_url
+            icon_url=ctx.message.author.avatar_url,
         )
 
         # Get a list of all cogs
@@ -92,11 +84,7 @@ class Embed(commands.Cog):
 
                 # Add the cog's details to the embed.
 
-                help_embed.add_field(
-                    name=cog_t,
-                    value=commands_list,
-                    inline=False
-                )
+                help_embed.add_field(name=cog_t, value=commands_list, inline=False)
         else:
 
             # If the cog was specified
@@ -107,7 +95,8 @@ class Embed(commands.Cog):
 
                 # Get a list of all commands in the specified cog
                 commands_list = self.bot.get_cog(
-                    cogs[lower_cogs.index(cog.lower())]).get_commands()
+                    cogs[lower_cogs.index(cog.lower())]
+                ).get_commands()
                 help_text = ''
 
                 # Add details of each command to the help text
@@ -117,25 +106,32 @@ class Embed(commands.Cog):
                 #
                 # Format
                 for command in commands_list:
-                    help_text += f'```{command.name}```\n' \
-                        f'**{command.description}**\n\n'
+                    help_text += (
+                        f'```{command.name}```\n' f'**{command.description}**\n\n'
+                    )
 
                     # Also add aliases, if there are any
                     if len(command.aliases) > 0:
-                        help_text += f'**Aliases :** `{"`, `".join(command.aliases)}`\n\n\n'
+                        help_text += (
+                            f'**Aliases :** `{"`, `".join(command.aliases)}`\n\n\n'
+                        )
                     else:
                         # Add a newline character to keep it pretty
                         # That IS the whole purpose of custom help
                         help_text += '\n'
 
                     # Finally the format
-                    help_text += f'Format: `@{self.bot.user.name}#{self.bot.user.discriminator}' \
+                    help_text += (
+                        f'Format: `@{self.bot.user.name}#{self.bot.user.discriminator}'
                         f' {command.name} {command.usage if command.usage is not None else ""}`\n\n\n\n'
+                    )
 
                 help_embed.description = help_text
             else:
                 # Notify the user of invalid cog and finish the command
-                await ctx.send('Invalid cog specified.\nUse `help` command to list all cogs.')
+                await ctx.send(
+                    'Invalid cog specified.\nUse `help` command to list all cogs.'
+                )
                 return
 
         await ctx.send(embed=help_embed)

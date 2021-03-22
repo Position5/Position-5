@@ -10,19 +10,18 @@ def gen_embed_fii(json_data):
     embed = discord.Embed(title=f"FII/DII Data: {json_data[0]['date']}")
     for item in json_data:
         embed.add_field(name='\u200b', value='\u200b', inline=False)
-        embed.add_field(name=item['category'].split(' ', 1)[0], value='\u200b', inline=False)
+        embed.add_field(
+            name=item['category'].split(' ', 1)[0], value='\u200b', inline=False
+        )
         embed.add_field(
             name='Buy Value', value=item['buyValue'], inline=True
-        ).add_field(
-            name='Sell Value', value=item['sellValue'], inline=True
-        ).add_field(
+        ).add_field(name='Sell Value', value=item['sellValue'], inline=True).add_field(
             name='Net Value', value=item['netValue'], inline=True
         )
     return embed
 
 
 class Stock(commands.Cog):
-
     def __init__(self, bot):
         self.bot = bot
         self.__request_headers = {
@@ -37,17 +36,21 @@ class Stock(commands.Cog):
             'Cache-Control': 'no-cache',
         }
         self.session = requests.Session()
-        request = self.session.get('https://www.nseindia.com/reports/fii-dii', headers=self.__request_headers, timeout=5)
+        request = self.session.get(
+            'https://www.nseindia.com/reports/fii-dii',
+            headers=self.__request_headers,
+            timeout=5,
+        )
         self.cookies = dict(request.cookies)
 
-    @commands.command(
-        name='fii',
-        description='latest fii data'
-    )
+    @commands.command(name='fii', description='latest fii data')
     async def fii_command(self, ctx):
         await ctx.message.delete()
         async with ClientSession() as session:
-            async with session.get('https://www.nseindia.com/api/fiidiiTradeReact', headers=self.__request_headers) as resp:
+            async with session.get(
+                'https://www.nseindia.com/api/fiidiiTradeReact',
+                headers=self.__request_headers,
+            ) as resp:
                 json_data = json.loads(await resp.text())
                 if json_data[0]['date'] != json_data[1]['date']:
                     return
@@ -55,12 +58,16 @@ class Stock(commands.Cog):
         return
 
     @commands.command(
-        name='fiir',
-        description='latest fii data via requests(synchronous)'
+        name='fiir', description='latest fii data via requests(synchronous)'
     )
     async def fii_synchronous_command(self, ctx):
         await ctx.message.delete()
-        response = self.session.get('https://www.nseindia.com/api/fiidiiTradeReact', headers=self.__request_headers, timeout=5, cookies=self.cookies)
+        response = self.session.get(
+            'https://www.nseindia.com/api/fiidiiTradeReact',
+            headers=self.__request_headers,
+            timeout=5,
+            cookies=self.cookies,
+        )
         json_data = response.json()
         if json_data[0]['date'] != json_data[1]['date']:
             return
@@ -75,17 +82,16 @@ class Stock(commands.Cog):
         await ctx.message.delete()
         await ctx.send(content=DISCLAIMER)
 
-    @commands.command(
-        name='nifty',
-        description='Why NIFTY'
-    )
+    @commands.command(name='nifty', description='Why NIFTY')
     async def nifty(self, ctx):
         await ctx.message.delete()
-        await ctx.send(embed=discord.Embed(
-            title='Why trading in NIFTY makes sense?',
-            description=WHY_NIFTY,
-            color=discord.Color.gold()
-        ))
+        await ctx.send(
+            embed=discord.Embed(
+                title='Why trading in NIFTY makes sense?',
+                description=WHY_NIFTY,
+                color=discord.Color.gold(),
+            )
+        )
 
 
 def setup(bot):

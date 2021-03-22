@@ -4,7 +4,6 @@ from discord.ext import commands
 
 
 class Activity(commands.Cog):
-
     def __init__(self, bot):
         self.bot = bot
 
@@ -12,8 +11,7 @@ class Activity(commands.Cog):
         name='activity',
         description='check activities of user',
         usage='<user>',
-        aliases=['act', 'spotify']
-
+        aliases=['act', 'spotify'],
     )
     async def activity(self, ctx, user: discord.Member = None):
         await ctx.message.delete()
@@ -27,30 +25,41 @@ class Activity(commands.Cog):
                     embed = discord.Embed(
                         title=f"{user.name}'s Spotify",
                         description="Listening to {}".format(activity.title),
-                        color=activity.color)
+                        color=activity.color,
+                    )
                     embed.set_thumbnail(url=activity.album_cover_url)
                     embed.add_field(name="Artist", value=activity.artist)
                     embed.add_field(name="Album", value=activity.album)
-                    embed.set_footer(text=f"Song started at {(activity.created_at + td(hours=5, minutes=30)).strftime('%H:%M:%S')}")
+                    embed.set_footer(
+                        text=f"Song started at {(activity.created_at + td(hours=5, minutes=30)).strftime('%H:%M:%S')}"
+                    )
                     await ctx.send(embed=embed)
                 elif isinstance(activity, discord.activity.Game):
                     embed = discord.Embed(
                         title=f"{user.name}'s Game",
                         description="Playing {}".format(activity.name),
-                        color=discord.Color.random())
-                    embed.set_footer(text=f"Game started at {(activity.start + td(hours=5, minutes=30)).strftime('%H:%M:%S')}")
+                        color=discord.Color.random(),
+                    )
+                    embed.set_footer(
+                        text=f"Game started at {(activity.start + td(hours=5, minutes=30)).strftime('%H:%M:%S')}"
+                    )
                     await ctx.send(embed=embed)
                 elif isinstance(activity, discord.activity.Streaming):
                     embed = discord.Embed(
                         title=f"{user.name}'s Stream",
                         description=f"Streaming {activity.name}",
-                        color=discord.Color.random())
+                        color=discord.Color.random(),
+                    )
                     embed.set_footer(text=f"Streaming at {activity.url}")
                     await ctx.send(embed=embed)
                 elif isinstance(activity, discord.activity.CustomActivity):
-                    await ctx.send(content=f'Status: {activity.emoji or ""} {activity.name}')
+                    await ctx.send(
+                        content=f'Status: {activity.emoji or ""} {activity.name}'
+                    )
                 else:
-                    await ctx.send(content=f'{activity.type.name.title()} {activity.name}')
+                    await ctx.send(
+                        content=f'{activity.type.name.title()} {activity.name}'
+                    )
 
 
 def setup(bot):
