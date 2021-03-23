@@ -1,7 +1,6 @@
 black
 cricapi
 discord.py
-flake8
 pylint
 python-dotenv
 requests
