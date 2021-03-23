@@ -14,7 +14,7 @@ Dedicated to best position 5 support.
 
 ### Linting
 
-Use pylint and flake8:
+Use `pylint` and `black`:
 
 - `python -m pylint position5`
-- `python -m flake8 position5`
+- `python -m black -S --check position5`
