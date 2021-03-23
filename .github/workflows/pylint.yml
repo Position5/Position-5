@@ -20,4 +20,4 @@ jobs:
     - name: Analysing the code with pylint and flake8
       run: |
         pylint position5
-        black --S --check position5
+        black -S --check position5
