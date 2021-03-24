@@ -24,14 +24,15 @@ bot = commands.Bot(
 
 
 cogs = [
+    'cogs.activity',
     'cogs.basic',
+    'cogs.cricket',
+    'cogs.fun',
     'cogs.embed',
     'cogs.meme_pic',
-    'cogs.cricket',
-    'cogs.stock',
-    'cogs.react',
-    'cogs.activity',
     'cogs.poll',
+    'cogs.react',
+    'cogs.stock',
 ]
 
 

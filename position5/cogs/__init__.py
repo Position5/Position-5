@@ -64,3 +64,7 @@ EMOJIS_DICT = {
     '8': ['8\U000020E3', '\U0001f3b1'],
     '9': ['9\U000020E3'],
 }
+
+# List of urls
+AGIFY = 'https://api.agify.io'
+GENDERIFY = 'https://api.genderize.io'
