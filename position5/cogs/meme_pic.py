@@ -2,8 +2,7 @@ from os.path import isfile, getmtime
 from pathlib import Path
 from discord.ext import commands
 import discord
-
-EMOTES_PATH = 'assets/emotes/'
+from . import EMOTES_PATH
 
 
 class MemePic(commands.Cog):

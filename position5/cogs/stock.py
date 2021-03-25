@@ -3,7 +3,7 @@ from discord.ext import commands
 from aiohttp import ClientSession
 import discord
 import requests
-from . import DISCLAIMER, WHY_NIFTY
+from . import DISCLAIMER, NSE_FII_DII, NSE_FII_DII_TRADE_REACT, WHY_NIFTY
 
 
 def gen_embed_fii(json_data):
@@ -37,7 +37,7 @@ class Stock(commands.Cog):
         }
         self.session = requests.Session()
         request = self.session.get(
-            'https://www.nseindia.com/reports/fii-dii',
+            NSE_FII_DII,
             headers=self.__request_headers,
             timeout=5,
         )
@@ -48,10 +48,10 @@ class Stock(commands.Cog):
         await ctx.message.delete()
         async with ClientSession() as session:
             async with session.get(
-                'https://www.nseindia.com/api/fiidiiTradeReact',
+                NSE_FII_DII_TRADE_REACT,
                 headers=self.__request_headers,
-            ) as resp:
-                json_data = json.loads(await resp.text())
+            ) as response:
+                json_data = json.loads(await response.text())
                 if json_data[0]['date'] != json_data[1]['date']:
                     return
                 await ctx.send(embed=gen_embed_fii(json_data))
@@ -63,7 +63,7 @@ class Stock(commands.Cog):
     async def fii_synchronous_command(self, ctx):
         await ctx.message.delete()
         response = self.session.get(
-            'https://www.nseindia.com/api/fiidiiTradeReact',
+            NSE_FII_DII_TRADE_REACT,
             headers=self.__request_headers,
             timeout=5,
             cookies=self.cookies,

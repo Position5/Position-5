@@ -2,6 +2,8 @@
 This file contains all constants to be used by cogs
 '''
 
+EMOTES_PATH = 'assets/emotes/'
+
 DISCLAIMER = '''
 I am NOT a SEBI registered advisor or a financial adviser.
 
@@ -90,3 +92,5 @@ EMOJIS_DICT = {
 # List of urls
 AGIFY = 'https://api.agify.io'
 GENDERIFY = 'https://api.genderize.io'
+NSE_FII_DII = 'https://www.nseindia.com/reports/fii-dii'
+NSE_FII_DII_TRADE_REACT = 'https://www.nseindia.com/api/fiidiiTradeReact'
