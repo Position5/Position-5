@@ -46,33 +46,37 @@ class MemePic(commands.Cog):
     )
     async def emotes_command(self, ctx, *, search: str = None):
         await ctx.message.delete()
-        title = f'Available emotes({search}):' if search else 'Available emotes:'
-        description = ''
-        embed_list = []
-        search_not_found = True
-        for emote in self.emotes:
-            if search and search.lower() not in emote.lower():
-                continue
-            search_not_found = False
-            description += '\n➥ ' + emote.split('.')[0]
-            if len(description) > 1996:
-                embed_list.append((title, description))
-                description = ''
-        if description != '':
-            embed_list.append((title, description))
+        title = f'Available emotes{f"({search})" if search else ""}:'
+        emotes_list = []
+        desc_list = []
+        if search:
+            for emote in self.emotes:
+                if search.lower() in emote.lower():
+                    emotes_list.append(emote.split('.')[0])
+        else:
+            emotes_list = [emote.split('.')[0] for emote in self.emotes]
 
-        total_count = len(embed_list)
-        for count, (title, description) in enumerate(embed_list, 1):
+        description = ''
+        for emote in emotes_list:
+            if len(description) >= 1900:
+                desc_list.append(description)
+                description = ''
+            else:
+                description += f'\n➥ {emote}'
+        if description != '':
+            desc_list.append(description)
+
+        total_count = len(desc_list)
+        for count, desc in enumerate(desc_list, 1):
             await ctx.send(
                 embed=discord.Embed(
                     title=f'{title} [{count}/{total_count}]',
-                    description=description,
+                    description=desc,
                     color=discord.Color.random(),
                 )
             )
 
-        # if no emotes found
-        if description == '' and search and search_not_found:
+        if total_count == 0:
             await ctx.send(
                 embed=discord.Embed(
                     title=title,
