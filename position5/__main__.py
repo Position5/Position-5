@@ -45,4 +45,9 @@ async def on_ready():
         bot.load_extension(cog)
 
 
-bot.run(os.getenv('DISCORD_BOT_TOKEN'), bot=True, reconnect=True)
+def main():
+    bot.run(os.getenv('DISCORD_BOT_TOKEN'), bot=True, reconnect=True)
+
+
+if __name__ == '__main__':
+    main()
