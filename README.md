@@ -6,15 +6,16 @@ Dedicated to best position 5 support.
 
 ## Setting Up
 
-- Install Python 3.5+
-- Install pip packages: `pip install -r requirements.txt`
+- Install Python 3.8+
+- Install `poetry`
+- Install dependencies: `poetry install`
 - Create a `.env` file in this directory, and place token `DISCORD_BOT_TOKEN=token-goes-here`
-	and place cricapi token `CRIC_API=token-goes-here`
+  and place cricapi token `CRIC_API=token-goes-here`
 - Run `python position5`
 
 ### Linting
 
-Use `pylint` and `black`:
+Use `poetry` to lint and format code:
 
-- `python -m pylint position5`
-- `python -m black -S --check position5`
+- `poetry run pylint position5`
+- `poetry run black position5`

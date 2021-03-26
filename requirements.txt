@@ -1,7 +1,0 @@
-aiohttp[speedups]
-black
-cricapi
-discord.py
-pylint
-python-dotenv
-requests
