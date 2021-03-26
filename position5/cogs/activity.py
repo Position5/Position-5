@@ -22,17 +22,20 @@ class Activity(commands.Cog):
         if user.activities:
             for activity in user.activities:
                 if isinstance(activity, discord.Spotify):
-                    embed = discord.Embed(
-                        title=f"{user.name}'s Spotify",
-                        description="Listening to {}".format(activity.title),
-                        color=activity.color,
+                    embed = (
+                        discord.Embed(
+                            title=f"{user.name}'s Spotify",
+                            description="Listening to {}".format(activity.title),
+                            color=activity.color,
+                        )
+                        .set_thumbnail(url=activity.album_cover_url)
+                        .add_field(name="Artist", value=activity.artist)
+                        .add_field(name="Album", value=activity.album)
                     )
-                    embed.set_thumbnail(url=activity.album_cover_url)
-                    embed.add_field(name="Artist", value=activity.artist)
-                    embed.add_field(name="Album", value=activity.album)
-                    embed.set_footer(
-                        text=f"Song started at {(activity.created_at + td(hours=5, minutes=30)).strftime('%H:%M:%S')}"
-                    )
+                    if activity.created_at:
+                        embed.set_footer(
+                            text=f"Song started at {(activity.created_at + td(hours=5, minutes=30)).strftime('%H:%M:%S')}"
+                        )
                     await ctx.send(embed=embed)
                 elif isinstance(activity, discord.activity.Game):
                     embed = discord.Embed(
@@ -40,9 +43,10 @@ class Activity(commands.Cog):
                         description="Playing {}".format(activity.name),
                         color=discord.Color.random(),
                     )
-                    embed.set_footer(
-                        text=f"Game started at {(activity.start + td(hours=5, minutes=30)).strftime('%H:%M:%S')}"
-                    )
+                    if activity.start:
+                        embed.set_footer(
+                            text=f"Game started at {(activity.start + td(hours=5, minutes=30)).strftime('%H:%M:%S')}"
+                        )
                     await ctx.send(embed=embed)
                 elif isinstance(activity, discord.activity.Streaming):
                     embed = discord.Embed(
