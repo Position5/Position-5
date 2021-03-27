@@ -34,7 +34,7 @@ class React(commands.Cog):
     )
     @delete_message()
     async def react_command(self, ctx, *, emoji: str = None):
-        index = 1
+        index = 0
         if emoji.startswith('-') and ' ' in emoji:
             _index, emoji = emoji.split(' ', 1)
             _index = _index[1:]
@@ -52,7 +52,7 @@ class React(commands.Cog):
     )
     @commands.has_permissions(manage_messages=True)
     @delete_message()
-    async def clear_reactions_command(self, ctx, *, index: int = 1):
+    async def clear_reactions_command(self, ctx, *, index: int = 0):
         index = min(abs(index), 9)
         last_message = await ctx.channel.history(limit=index + 1).flatten()
         await last_message[index].clear_reactions()
@@ -65,7 +65,7 @@ class React(commands.Cog):
     )
     @delete_message()
     async def previous(self, ctx, *, text: str = None):
-        index = 1
+        index = 0
         if text.startswith('-') and ' ' in text:
             _index, text = text.split(' ', 1)
             _index = _index[1:]
