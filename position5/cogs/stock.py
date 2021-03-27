@@ -3,7 +3,13 @@ from discord.ext import commands
 from aiohttp import ClientSession
 import discord
 import requests
-from . import DISCLAIMER, NSE_FII_DII, NSE_FII_DII_TRADE_REACT, WHY_NIFTY
+from . import (
+    DISCLAIMER,
+    NSE_FII_DII,
+    NSE_FII_DII_TRADE_REACT,
+    WHY_NIFTY,
+    delete_message,
+)
 
 
 def gen_embed_fii(json_data):
@@ -44,8 +50,8 @@ class Stock(commands.Cog):
         self.cookies = dict(request.cookies)
 
     @commands.command(name='fii', description='latest fii data')
+    @delete_message()
     async def fii_command(self, ctx):
-        await ctx.message.delete()
         async with ClientSession() as session:
             async with session.get(
                 NSE_FII_DII_TRADE_REACT,
@@ -55,13 +61,12 @@ class Stock(commands.Cog):
                 if json_data[0]['date'] != json_data[1]['date']:
                     return
                 await ctx.send(embed=gen_embed_fii(json_data))
-        return
 
     @commands.command(
         name='fiir', description='latest fii data via requests(synchronous)'
     )
+    @delete_message()
     async def fii_synchronous_command(self, ctx):
-        await ctx.message.delete()
         response = self.session.get(
             NSE_FII_DII_TRADE_REACT,
             headers=self.__request_headers,
@@ -72,19 +77,18 @@ class Stock(commands.Cog):
         if json_data[0]['date'] != json_data[1]['date']:
             return
         await ctx.send(embed=gen_embed_fii(json_data))
-        return
 
     @commands.command(
         name='disclaimer',
         description='disclaimer',
     )
+    @delete_message()
     async def disclaimer(self, ctx):
-        await ctx.message.delete()
         await ctx.send(content=DISCLAIMER)
 
     @commands.command(name='nifty', description='Why NIFTY')
+    @delete_message()
     async def nifty(self, ctx):
-        await ctx.message.delete()
         await ctx.send(
             embed=discord.Embed(
                 title='Why trading in NIFTY makes sense?',

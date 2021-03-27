@@ -17,7 +17,8 @@ disable=missing-function-docstring,
       missing-module-docstring,
       missing-class-docstring,
       line-too-long,
-      no-member
+      no-member,
+      unused-argument
 enable=c-extension-no-member
 
 

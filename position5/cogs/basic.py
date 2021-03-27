@@ -1,5 +1,6 @@
 from datetime import datetime as dt
 from discord.ext import commands
+from . import delete_message
 
 
 class Basic(commands.Cog):
@@ -21,9 +22,9 @@ class Basic(commands.Cog):
         aliases=['repeat', 'parrot'],
         usage='<text>',
     )
+    @delete_message()
     async def say_command(self, ctx):
         msg = ctx.message.content
-        await ctx.message.delete()
         prefix_used = ctx.prefix
         alias_used = ctx.invoked_with
         text = msg[len(prefix_used) + len(alias_used) :].strip()

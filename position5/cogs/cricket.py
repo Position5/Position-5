@@ -2,6 +2,7 @@ import os
 from discord.ext import commands
 import discord
 from cricapi import Cricapi
+from . import delete_message
 
 
 class Cricket(commands.Cog):
@@ -10,13 +11,12 @@ class Cricket(commands.Cog):
         self.cricket = Cricapi(os.environ.get('CRIC_API'))
 
     @commands.command(name='cricket', description='cricket commands', aliases=['cric'])
+    @delete_message()
     async def cricket_command(self, ctx):
         def check(msg):
             return (
                 msg.channel == ctx.message.channel and msg.author == ctx.message.author
             )
-
-        await ctx.message.delete()
 
         msg_og = await ctx.send(
             embed=discord.Embed(

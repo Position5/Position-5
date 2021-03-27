@@ -1,6 +1,9 @@
 '''
 This file contains all constants to be used by cogs
 '''
+import functools
+from discord.ext.commands import Context
+
 
 EMOTES_PATH = 'assets/emotes/'
 
@@ -39,7 +42,8 @@ EMOJIS_DICT = {
     'l': ['\U0001f1f1'],
     'm': ['\U0001f1f2', 'Ⓜ️', '♏', '♍'],
     'n': ['\U0001f1f3', '♑'],
-    'o': ['\U0001f1f4', '🅾️', '⭕'],  # '⚪️',record_button, doughnut, nazar_amulet
+    # '⚪️',record_button, doughnut, nazar_amulet
+    'o': ['\U0001f1f4', '🅾️', '⭕'],
     'p': ['\U0001f1f5', '🅿'],
     'q': ['\U0001f1f6'],
     'r': ['\U0001f1f7', '®'],
@@ -94,3 +98,16 @@ AGIFY = 'https://api.agify.io'
 GENDERIFY = 'https://api.genderize.io'
 NSE_FII_DII = 'https://www.nseindia.com/reports/fii-dii'
 NSE_FII_DII_TRADE_REACT = 'https://www.nseindia.com/api/fiidiiTradeReact'
+
+
+def delete_message():
+    def wrapper(func):
+        @functools.wraps(func)
+        async def wrapped(*args, **kwargs):
+            assert isinstance(args[1], Context)
+            await args[1].message.delete()
+            return await func(*args, **kwargs)
+
+        return wrapped
+
+    return wrapper

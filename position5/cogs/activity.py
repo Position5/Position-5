@@ -2,6 +2,7 @@ from datetime import timedelta as td
 import random
 import discord
 from discord.ext import commands, tasks
+from . import delete_message
 
 
 class Activity(commands.Cog):
@@ -33,9 +34,8 @@ class Activity(commands.Cog):
         usage='<user>',
         aliases=['act', 'spotify'],
     )
+    @delete_message()
     async def activity(self, ctx, user: discord.Member = None):
-        await ctx.message.delete()
-
         if user is None:
             user = ctx.author
 

@@ -1,7 +1,7 @@
 from discord.ext import commands
 import aiohttp
 import discord
-from . import AGIFY, GENDERIFY
+from . import AGIFY, GENDERIFY, delete_message
 
 
 class Fun(commands.Cog):
@@ -15,8 +15,8 @@ class Fun(commands.Cog):
         usage='<name> <country-optional>',
         alisaes=['whoami'],
     )
+    @delete_message()
     async def whoami(self, ctx, name: str = None, *, country: str = None):
-        await ctx.message.delete()
         params = {}
         if name:
             params['name'] = name

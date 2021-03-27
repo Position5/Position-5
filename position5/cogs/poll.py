@@ -1,6 +1,7 @@
 import asyncio
 import discord
 from discord.ext import commands
+from . import delete_message
 
 
 class Poll(commands.Cog):
@@ -8,8 +9,8 @@ class Poll(commands.Cog):
         self.bot = bot
 
     @commands.command(name='poll', description='poll without custom options')
+    @delete_message()
     async def poll_without_options(self, ctx, *, question):
-        await ctx.message.delete()
         reactions = ['✅', '❌', '💤']
         embed = (
             discord.Embed(title=question)
