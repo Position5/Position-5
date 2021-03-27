@@ -18,7 +18,6 @@ class React(commands.Cog):
     async def alpha_command(self, ctx, *, text):
         await ctx.message.delete()
         await ctx.send(content=(''.join([char_to_emoji(char) for char in text])))
-        return
 
     @commands.command(
         name='avatar', description='get user avatar', aliases=['av'], usage='user'
@@ -26,7 +25,6 @@ class React(commands.Cog):
     async def avatar(self, ctx, *, avamember: discord.Member = None):
         await ctx.message.delete()
         await ctx.send(avamember.avatar_url if avamember else ctx.author.avatar_url)
-        return
 
     @commands.command(
         name='react',
@@ -45,7 +43,6 @@ class React(commands.Cog):
         last_message = await ctx.channel.history(limit=index + 1).flatten()
         await ctx.message.delete()
         await last_message[index].add_reaction(emoji)
-        return
 
     @commands.command(
         name='clear',
@@ -59,7 +56,6 @@ class React(commands.Cog):
         last_message = await ctx.channel.history(limit=index + 1).flatten()
         await ctx.message.delete()
         await last_message[index].clear_reactions()
-        return
 
     @commands.command(
         name='previous',
@@ -86,7 +82,6 @@ class React(commands.Cog):
                 continue
             else:
                 break
-        return
 
 
 def setup(bot):

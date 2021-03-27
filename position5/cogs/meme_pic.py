@@ -24,7 +24,6 @@ class MemePic(commands.Cog):
     async def xdoubt_command(self, ctx):
         await ctx.message.delete()
         await ctx.send(file=discord.File('assets/meme_pic/xdoubt.png'))
-        return
 
     @commands.command(name='emote', description='emote as pictures', usage='<emote>')
     async def emote_command(self, ctx, *, emote_name: str):
@@ -33,13 +32,11 @@ class MemePic(commands.Cog):
             await ctx.send(
                 file=discord.File(EMOTES_PATH + self.emotes_dict[emote_name.lower()])
             )
-        return
 
     @commands.command(name='refresh', description='refresh emotes list')
     async def refresh_emotes(self, ctx):
         await ctx.message.delete()
         self._refresh_emotes()
-        return
 
     @commands.command(
         name='emotes', description='sends list of emotes', usage='<search_string>'
@@ -84,7 +81,6 @@ class MemePic(commands.Cog):
                     color=discord.Color.random(),
                 )
             )
-        return
 
 
 def setup(bot):

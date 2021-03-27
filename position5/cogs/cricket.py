@@ -65,7 +65,6 @@ class Cricket(commands.Cog):
                 )
             )
             await msg_og.edit(embed=response)
-        return
 
 
 def setup(bot):

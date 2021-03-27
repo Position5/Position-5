@@ -1,11 +1,31 @@
 from datetime import timedelta as td
+import random
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 
 class Activity(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.support_activities = [
+            discord.Game(name="Dota 2"),
+            discord.Streaming(name="Dota 2", url="https://www.twitch.tv/dreamleague"),
+            discord.Activity(type=discord.ActivityType.listening, name="Gucci gang"),
+            discord.Activity(
+                type=discord.ActivityType.watching, name="DOTA: Dragon's Blood"
+            ),
+            discord.Streaming(name="Dota 2", url="https://www.twitch.tv/MiaMalkova"),
+            discord.Activity(type=discord.ActivityType.watching, name="Snyder Cut"),
+        ]
+        self.change_activity.start()
+
+    @tasks.loop(seconds=10.0)
+    async def change_activity(self):
+        await self.bot.change_presence(activity=random.choice(self.support_activities))
+
+    @change_activity.before_loop
+    async def before_change_activity(self):
+        await self.bot.wait_until_ready()
 
     @commands.command(
         name='activity',
