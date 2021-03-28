@@ -1,6 +1,6 @@
 from datetime import datetime as dt
 from discord.ext import commands
-from . import delete_message
+from . import delete_message, log_params
 
 
 class Basic(commands.Cog):
@@ -8,6 +8,7 @@ class Basic(commands.Cog):
         self.bot = bot
 
     @commands.command(name='ping', description='The ping command', aliases=['p'])
+    @log_params()
     async def ping_command(self, ctx):
         start = dt.timestamp(dt.now())
         msg = await ctx.send(content='Pinging')
@@ -23,6 +24,7 @@ class Basic(commands.Cog):
         usage='<text>',
     )
     @delete_message()
+    @log_params()
     async def say_command(self, ctx):
         msg = ctx.message.content
         prefix_used = ctx.prefix

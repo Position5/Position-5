@@ -1,7 +1,7 @@
 from copy import deepcopy
 from discord.ext import commands
 import discord
-from . import EMOJIS_DICT, delete_message
+from . import EMOJIS_DICT, delete_message, log_params
 
 
 def char_to_emoji(char):
@@ -16,6 +16,7 @@ class React(commands.Cog):
 
     @commands.command(name='alpha', description='say with alphabets', usage='<text>')
     @delete_message()
+    @log_params()
     async def alpha_command(self, ctx, *, text):
         await ctx.send(content=(''.join([char_to_emoji(char) for char in text])))
 
@@ -23,6 +24,7 @@ class React(commands.Cog):
         name='avatar', description='get user avatar', aliases=['av'], usage='user'
     )
     @delete_message()
+    @log_params()
     async def avatar(self, ctx, *, avamember: discord.Member = None):
         await ctx.send(avamember.avatar_url if avamember else ctx.author.avatar_url)
 
@@ -33,6 +35,7 @@ class React(commands.Cog):
         aliases=['re'],
     )
     @delete_message()
+    @log_params()
     async def react_command(self, ctx, *, emoji: str = None):
         index = 0
         if emoji.startswith('-') and ' ' in emoji:
@@ -52,6 +55,7 @@ class React(commands.Cog):
     )
     @commands.has_permissions(manage_messages=True)
     @delete_message()
+    @log_params()
     async def clear_reactions_command(self, ctx, *, index: int = 0):
         index = min(abs(index), 9)
         last_message = await ctx.channel.history(limit=index + 1).flatten()
@@ -64,6 +68,7 @@ class React(commands.Cog):
         aliases=['pre'],
     )
     @delete_message()
+    @log_params()
     async def previous(self, ctx, *, text: str = None):
         index = 0
         if text.startswith('-') and ' ' in text:

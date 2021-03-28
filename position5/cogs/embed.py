@@ -1,5 +1,6 @@
 from discord.ext import commands
 import discord
+from . import log_params
 
 
 class Embed(commands.Cog):
@@ -10,6 +11,7 @@ class Embed(commands.Cog):
         name='embed',
         description='The embed command',
     )
+    @log_params()
     async def embed_command(self, ctx):
         def check(msg):
             return (
@@ -42,6 +44,7 @@ class Embed(commands.Cog):
         aliases=['commands', 'command'],
         usage='cog',
     )
+    @log_params()
     async def help_command(self, ctx, cog='all'):
         help_embed = discord.Embed(title='Help', color=discord.Color.random())
         help_embed.set_thumbnail(url=self.bot.user.avatar_url)

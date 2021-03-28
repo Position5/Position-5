@@ -1,7 +1,7 @@
 import asyncio
 import discord
 from discord.ext import commands
-from . import delete_message
+from . import delete_message, log_params
 
 
 class Poll(commands.Cog):
@@ -10,6 +10,7 @@ class Poll(commands.Cog):
 
     @commands.command(name='poll', description='poll without custom options')
     @delete_message()
+    @log_params()
     async def poll_without_options(self, ctx, *, question):
         reactions = ['✅', '❌', '💤']
         embed = (

@@ -9,6 +9,7 @@ from . import (
     NSE_FII_DII_TRADE_REACT,
     WHY_NIFTY,
     delete_message,
+    log_params,
 )
 
 
@@ -51,6 +52,7 @@ class Stock(commands.Cog):
 
     @commands.command(name='fii', description='latest fii data')
     @delete_message()
+    @log_params()
     async def fii_command(self, ctx):
         async with ClientSession() as session:
             async with session.get(
@@ -66,6 +68,7 @@ class Stock(commands.Cog):
         name='fiir', description='latest fii data via requests(synchronous)'
     )
     @delete_message()
+    @log_params()
     async def fii_synchronous_command(self, ctx):
         response = self.session.get(
             NSE_FII_DII_TRADE_REACT,
@@ -83,11 +86,13 @@ class Stock(commands.Cog):
         description='disclaimer',
     )
     @delete_message()
+    @log_params()
     async def disclaimer(self, ctx):
         await ctx.send(content=DISCLAIMER)
 
     @commands.command(name='nifty', description='Why NIFTY')
     @delete_message()
+    @log_params()
     async def nifty(self, ctx):
         await ctx.send(
             embed=discord.Embed(

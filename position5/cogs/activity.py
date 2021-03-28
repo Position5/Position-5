@@ -2,7 +2,7 @@ from datetime import timedelta as td
 import random
 import discord
 from discord.ext import commands, tasks
-from . import delete_message
+from . import delete_message, log_params
 
 
 class Activity(commands.Cog):
@@ -35,6 +35,7 @@ class Activity(commands.Cog):
         aliases=['act', 'spotify'],
     )
     @delete_message()
+    @log_params()
     async def activity(self, ctx, user: discord.Member = None):
         if user is None:
             user = ctx.author

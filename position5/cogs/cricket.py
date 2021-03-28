@@ -2,7 +2,7 @@ import os
 from discord.ext import commands
 import discord
 from cricapi import Cricapi
-from . import delete_message
+from . import delete_message, log_params
 
 
 class Cricket(commands.Cog):
@@ -12,6 +12,7 @@ class Cricket(commands.Cog):
 
     @commands.command(name='cricket', description='cricket commands', aliases=['cric'])
     @delete_message()
+    @log_params()
     async def cricket_command(self, ctx):
         def check(msg):
             return (

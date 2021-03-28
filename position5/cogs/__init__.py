@@ -1,8 +1,12 @@
 '''
 This file contains all constants to be used by cogs
 '''
+import logging
 import functools
 from discord.ext.commands import Context
+
+
+log = logging.getLogger('position5')
 
 
 EMOTES_PATH = 'assets/emotes/'
@@ -104,8 +108,27 @@ def delete_message():
     def wrapper(func):
         @functools.wraps(func)
         async def wrapped(*args, **kwargs):
-            assert isinstance(args[1], Context)
-            await args[1].message.delete()
+            assert isinstance(ctx := args[1], Context)
+            await ctx.message.delete()
+            return await func(*args, **kwargs)
+
+        return wrapped
+
+    return wrapper
+
+
+def log_params():
+    def wrapper(func):
+        @functools.wraps(func)
+        async def wrapped(*args, **kwargs):
+            assert isinstance(ctx := args[1], Context)
+            log.info(
+                'Author: %s | Message: %s | Method: %s | Params: %s',
+                ctx.author.name,
+                ctx.message.content,
+                func.__name__,
+                kwargs,
+            )
             return await func(*args, **kwargs)
 
         return wrapped
