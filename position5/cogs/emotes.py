@@ -5,7 +5,7 @@ import discord
 from . import EMOTES_PATH, delete_message, log_params
 
 
-class MemePic(commands.Cog):
+class Emotes(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._refresh_emotes()
@@ -19,12 +19,6 @@ class MemePic(commands.Cog):
         self.emotes_dict = {
             emote.split('.', 1)[0].lower(): emote for emote in self.emotes
         }
-
-    @commands.command(name='xdoubt', description='xdoubt pic')
-    @delete_message()
-    @log_params()
-    async def xdoubt_command(self, ctx):
-        await ctx.send(file=discord.File('assets/meme_pic/xdoubt.png'))
 
     @commands.command(name='emote', description='emote as pictures', usage='<emote>')
     @delete_message()
@@ -88,4 +82,4 @@ class MemePic(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(MemePic(bot))
+    bot.add_cog(Emotes(bot))

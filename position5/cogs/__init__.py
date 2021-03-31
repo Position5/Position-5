@@ -10,6 +10,7 @@ log = logging.getLogger('position5')
 
 
 EMOTES_PATH = 'assets/emotes/'
+PIC_PATH = 'assets/pic/'
 
 DISCLAIMER = '''
 I am NOT a SEBI registered advisor or a financial adviser.

@@ -15,7 +15,7 @@ class Poll(commands.Cog):
         reactions = ['✅', '❌', '💤']
         embed = (
             discord.Embed(title=question)
-            .set_footer(text='Poll will end in 100 seconds! Please react once.')
+            .set_footer(text='Poll will end in 30 seconds! Please react once.')
             .set_author(
                 name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url
             )
@@ -24,7 +24,7 @@ class Poll(commands.Cog):
         for reaction in reactions:
             await message.add_reaction(reaction)
 
-        await asyncio.sleep(10)
+        await asyncio.sleep(30)
 
         total_count = -3
         reaction_count = {}
