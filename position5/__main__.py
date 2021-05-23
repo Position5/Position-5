@@ -48,6 +48,7 @@ cogs = [
     'cogs.activity',
     'cogs.basic',
     'cogs.cricket',
+    'cogs.db',
     'cogs.embed',
     'cogs.emotes',
     'cogs.error_handler',
