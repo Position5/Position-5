@@ -47,6 +47,7 @@ bot = commands.Bot(
 cogs = [
     'cogs.activity',
     'cogs.basic',
+    'cogs.core',
     'cogs.cricket',
     'cogs.db',
     'cogs.embed',
