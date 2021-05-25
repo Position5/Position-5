@@ -7,11 +7,11 @@ class Pic(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='xdoubt', description='xdoubt pic')
+    @commands.command(name="xdoubt", description="xdoubt pic")
     @delete_message()
     @log_params()
     async def xdoubt(self, ctx):
-        await ctx.send(file=discord.File(f'{PIC_PATH}xdoubt.png'))
+        await ctx.send(file=discord.File(f"{PIC_PATH}xdoubt.png"))
 
 
 def setup(bot):

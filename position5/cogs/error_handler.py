@@ -1,7 +1,7 @@
 import logging
 from discord.ext import commands
 
-log = logging.getLogger('position5.error_handler')
+log = logging.getLogger("position5.error_handler")
 
 
 class ErrorHandler(commands.Cog):
@@ -20,16 +20,16 @@ class ErrorHandler(commands.Cog):
         """
 
         # This prevents any commands with local handlers being handled here in on_command_error.
-        if hasattr(ctx.command, 'on_error'):
+        if hasattr(ctx.command, "on_error"):
             return
 
         # Allows us to check for original exceptions raised and sent to CommandInvokeError.
         # If nothing is found. We keep the exception passed to on_command_error.
-        error = getattr(error, 'original', error)
+        error = getattr(error, "original", error)
 
         if isinstance(error, commands.CommandNotFound):
             log.info(
-                'Command Not Found | Message: %s | Author: %s',
+                "Command Not Found | Message: %s | Author: %s",
                 ctx.message.content,
                 ctx.author.name,
             )
@@ -48,8 +48,8 @@ class ErrorHandler(commands.Cog):
         #         await ctx.send('I could not find that member. Please try again.')
 
         else:
-            log.info('Exception in command %s', ctx.command)
-            log.error('Type %s | Error: %s', type(error), error)
+            log.info("Exception in command %s", ctx.command)
+            log.error("Type %s | Error: %s", type(error), error)
 
 
 def setup(bot):

@@ -17,10 +17,10 @@ class Emotes(commands.Cog):
             if isfile(f)
         ]
         self.emotes_dict = {
-            emote.split('.', 1)[0].lower(): emote for emote in self.emotes
+            emote.split(".", 1)[0].lower(): emote for emote in self.emotes
         }
 
-    @commands.command(name='emote', description='emote as pictures', usage='<emote>')
+    @commands.command(name="emote", description="emote as pictures", usage="<emote>")
     @delete_message()
     @log_params()
     async def send_emote(self, ctx, *, emote_name: str):
@@ -29,14 +29,14 @@ class Emotes(commands.Cog):
                 file=discord.File(EMOTES_PATH + self.emotes_dict[emote_name.lower()])
             )
 
-    @commands.command(name='refresh', description='refresh emotes list')
+    @commands.command(name="refresh", description="refresh emotes list")
     @delete_message()
     @log_params()
     async def refresh_emotes(self, ctx):
         self._refresh_emotes()
 
     @commands.command(
-        name='emotes', description='sends list of emotes', usage='<search_string>'
+        name="emotes", description="sends list of emotes", usage="<search_string>"
     )
     @delete_message()
     @log_params()
@@ -47,25 +47,25 @@ class Emotes(commands.Cog):
         if search:
             for emote in self.emotes:
                 if search.lower() in emote.lower():
-                    emotes_list.append(emote.split('.')[0])
+                    emotes_list.append(emote.split(".")[0])
         else:
-            emotes_list = [emote.split('.')[0] for emote in self.emotes]
+            emotes_list = [emote.split(".")[0] for emote in self.emotes]
 
-        description = ''
+        description = ""
         for emote in emotes_list:
             if len(description) >= 1900:
                 desc_list.append(description)
-                description = ''
+                description = ""
             else:
-                description += f'\n➥ {emote}'
-        if description != '':
+                description += f"\n➥ {emote}"
+        if description != "":
             desc_list.append(description)
 
         total_count = len(desc_list)
         for count, desc in enumerate(desc_list, 1):
             await ctx.send(
                 embed=discord.Embed(
-                    title=f'{title} [{count}/{total_count}]',
+                    title=f"{title} [{count}/{total_count}]",
                     description=desc,
                     color=discord.Color.random(),
                 )
@@ -75,7 +75,7 @@ class Emotes(commands.Cog):
             await ctx.send(
                 embed=discord.Embed(
                     title=title,
-                    description='No emotes found',
+                    description="No emotes found",
                     color=discord.Color.random(),
                 )
             )

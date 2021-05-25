@@ -29,10 +29,10 @@ class Activity(commands.Cog):
         await self.bot.wait_until_ready()
 
     @commands.command(
-        name='activity',
-        description='check activities of user',
-        usage='<user>',
-        aliases=['act', 'spotify'],
+        name="activity",
+        description="check activities of user",
+        usage="<user>",
+        aliases=["act", "spotify"],
     )
     @delete_message()
     @log_params()
@@ -83,25 +83,26 @@ class Activity(commands.Cog):
                     content=f'Status: {activity.emoji or ""} {activity.name}'
                 )
             else:
-                await ctx.send(content=f'{activity.type.name.title()} {activity.name}')
+                await ctx.send(content=f"{activity.type.name.title()} {activity.name}")
 
     @commands.command(
-        name='info',
-        description='info of user',
-        usage='<user>',
+        name="info",
+        description="info of user",
+        usage="<user>",
     )
     @delete_message()
     @log_params()
     async def user_info(self, ctx, user: discord.Member = None):
         if user is None:
             user = ctx.author
-        description = ''
+        description = ""
         description += f"Joined {user.guild} on {user.joined_at.date()}\n"
         description += f"Account created on {user.created_at.date()}\n"
         description += (
             user.premium_since and f"Premium since {user.premium_since.date()}\n" or ""
         )
-        description += user.is_on_mobile() and "Currently on Mobile\n" or ""
+        description += f"Currently {user.status}"
+        description += user.is_on_mobile() and " on Mobile\n" or "\n"
         description += f"Top role: {user.top_role}\n"
         description += (
             user.voice

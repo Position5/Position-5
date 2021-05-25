@@ -8,14 +8,14 @@ class Poll(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='poll', description='poll without custom options')
+    @commands.command(name="poll", description="poll without custom options")
     @delete_message()
     @log_params()
     async def poll_without_options(self, ctx, *, question):
-        reactions = ['✅', '❌', '💤']
+        reactions = ["✅", "❌", "💤"]
         embed = (
             discord.Embed(title=question)
-            .set_footer(text='Poll will end in 30 seconds! Please react once.')
+            .set_footer(text="Poll will end in 30 seconds! Please react once.")
             .set_author(
                 name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url
             )
@@ -34,12 +34,12 @@ class Poll(commands.Cog):
             total_count += reaction.count
             reaction_count[reaction.emoji] = reaction.count
 
-        yes_count = reaction_count.get('✅', 1) - 1
-        no_count = reaction_count.get('❌', 1) - 1
+        yes_count = reaction_count.get("✅", 1) - 1
+        no_count = reaction_count.get("❌", 1) - 1
 
         results = discord.Embed(
-            title='Results',
-            description=f'Asked: **{question}**\n\n✅ : Yes({yes_count})\n\n❌ : No({no_count}) \n\n💤 : Don\'t care({total_count - yes_count - no_count})',
+            title="Results",
+            description=f"Asked: **{question}**\n\n✅ : Yes({yes_count})\n\n❌ : No({no_count}) \n\n💤 : Don't care({total_count - yes_count - no_count})",
         )
         await ctx.send(embed=results)
 

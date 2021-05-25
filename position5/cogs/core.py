@@ -6,12 +6,12 @@ class Core(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='logout')
+    @commands.command(name="logout")
     @commands.has_permissions(administrator=True)
     @delete_message()
     @log_params()
     async def close(self, ctx):
-        await ctx.send('Logging off')
+        await ctx.send("Logging off")
         await self.bot.close()
 
 
