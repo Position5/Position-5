@@ -12,7 +12,7 @@ class Embed(commands.Cog):
         description='The embed command',
     )
     @log_params()
-    async def embed_command(self, ctx):
+    async def embed(self, ctx):
         def check(msg):
             return (
                 msg.channel == ctx.message.channel and msg.author == ctx.message.author
@@ -45,7 +45,7 @@ class Embed(commands.Cog):
         usage='cog',
     )
     @log_params()
-    async def help_command(self, ctx, cog='all'):
+    async def help(self, ctx, cog='all'):
         help_embed = discord.Embed(title='Help', color=discord.Color.random())
         help_embed.set_thumbnail(url=self.bot.user.avatar_url)
         help_embed.set_footer(

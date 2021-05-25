@@ -53,7 +53,7 @@ class Stock(commands.Cog):
     @commands.command(name='fii', description='latest fii data')
     @delete_message()
     @log_params()
-    async def fii_command(self, ctx):
+    async def fii(self, ctx):
         async with ClientSession() as session:
             async with session.get(
                 NSE_FII_DII_TRADE_REACT,
@@ -69,7 +69,7 @@ class Stock(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def fii_synchronous_command(self, ctx):
+    async def fii_synchronous(self, ctx):
         response = self.session.get(
             NSE_FII_DII_TRADE_REACT,
             headers=self.__request_headers,

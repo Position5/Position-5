@@ -10,7 +10,7 @@ class Pic(commands.Cog):
     @commands.command(name='xdoubt', description='xdoubt pic')
     @delete_message()
     @log_params()
-    async def xdoubt_command(self, ctx):
+    async def xdoubt(self, ctx):
         await ctx.send(file=discord.File(f'{PIC_PATH}xdoubt.png'))
 
 

@@ -9,7 +9,7 @@ class Basic(commands.Cog):
 
     @commands.command(name='ping', description='The ping command', aliases=['p'])
     @log_params()
-    async def ping_command(self, ctx):
+    async def ping(self, ctx):
         start = dt.timestamp(dt.now())
         msg = await ctx.send(content='Pinging')
 
@@ -25,7 +25,7 @@ class Basic(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def say_command(self, ctx):
+    async def say(self, ctx):
         msg = ctx.message.content
         prefix_used = ctx.prefix
         alias_used = ctx.invoked_with

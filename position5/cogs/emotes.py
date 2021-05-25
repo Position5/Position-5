@@ -23,7 +23,7 @@ class Emotes(commands.Cog):
     @commands.command(name='emote', description='emote as pictures', usage='<emote>')
     @delete_message()
     @log_params()
-    async def emote_command(self, ctx, *, emote_name: str):
+    async def send_emote(self, ctx, *, emote_name: str):
         if emote_name.lower() in self.emotes_dict:
             await ctx.send(
                 file=discord.File(EMOTES_PATH + self.emotes_dict[emote_name.lower()])
@@ -40,7 +40,7 @@ class Emotes(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def emotes_command(self, ctx, *, search: str = None):
+    async def list_emotes(self, ctx, *, search: str = None):
         title = f'Available emotes{f"({search})" if search else ""}:'
         emotes_list = []
         desc_list = []

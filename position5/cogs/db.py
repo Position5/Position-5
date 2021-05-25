@@ -14,7 +14,7 @@ class Db(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def store_command(self, ctx, key: str, *, value: str):
+    async def store_data(self, ctx, key: str, *, value: str):
         self.t_db.upsert(
             {'author': ctx.author.id, key: value},
             (self.query[key].exists()) & (self.query.author == ctx.author.id),
@@ -25,7 +25,7 @@ class Db(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def get_command(self, ctx, key: str):
+    async def get_data(self, ctx, key: str):
         result = self.t_db.get(
             (self.query[key].exists()) & (self.query.author == ctx.author.id)
         )

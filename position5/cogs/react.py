@@ -17,7 +17,7 @@ class React(commands.Cog):
     @commands.command(name='alpha', description='say with alphabets', usage='<text>')
     @delete_message()
     @log_params()
-    async def alpha_command(self, ctx, *, text):
+    async def text_to_alpha_emotes(self, ctx, *, text):
         await ctx.send(content=(''.join([char_to_emoji(char) for char in text])))
 
     @commands.command(
@@ -25,7 +25,7 @@ class React(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def avatar(self, ctx, *, avamember: discord.Member = None):
+    async def user_avatar(self, ctx, *, avamember: discord.Member = None):
         await ctx.send(avamember.avatar_url if avamember else ctx.author.avatar_url)
 
     @commands.command(
@@ -36,7 +36,7 @@ class React(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def react_command(self, ctx, *, emoji: str = None):
+    async def react_with_emote(self, ctx, *, emoji: str = None):
         index = 0
         if emoji.startswith('-') and ' ' in emoji:
             _index, emoji = emoji.split(' ', 1)
@@ -56,7 +56,7 @@ class React(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     @delete_message()
     @log_params()
-    async def clear_reactions_command(self, ctx, *, index: int = 0):
+    async def clear_reactions(self, ctx, *, index: int = 0):
         index = min(abs(index), 9)
         last_message = await ctx.channel.history(limit=index + 1).flatten()
         await last_message[index].clear_reactions()
@@ -69,7 +69,7 @@ class React(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def previous(self, ctx, *, text: str = None):
+    async def react_to_previous(self, ctx, *, text: str = None):
         index = 0
         if text.startswith('-') and ' ' in text:
             _index, text = text.split(' ', 1)
