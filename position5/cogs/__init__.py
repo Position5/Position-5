@@ -10,7 +10,10 @@ log = logging.getLogger("position5")
 
 
 EMOTES_PATH = "assets/emotes/"
+FONT_PATH = "assets/font/"
+MEME_PATH = "assets/meme/"
 PIC_PATH = "assets/pic/"
+TEMP_PATH = "assets/tmp/"
 
 DISCLAIMER = """
 I am NOT a SEBI registered advisor or a financial adviser.

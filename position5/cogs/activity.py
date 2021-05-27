@@ -12,9 +12,7 @@ class Activity(commands.Cog):
             discord.Game(name="Dota 2"),
             discord.Streaming(name="Dota 2", url="https://www.twitch.tv/dreamleague"),
             discord.Activity(type=discord.ActivityType.listening, name="Gucci gang"),
-            discord.Activity(
-                type=discord.ActivityType.watching, name="DOTA: Dragon's Blood"
-            ),
+            discord.Activity(type=discord.ActivityType.watching, name="DOTA: Dragon's Blood"),
             discord.Streaming(name="Dota 2", url="https://www.twitch.tv/MiaMalkova"),
             discord.Activity(type=discord.ActivityType.watching, name="Snyder Cut"),
         ]
@@ -79,9 +77,7 @@ class Activity(commands.Cog):
                 embed.set_footer(text=f"Streaming at {activity.url}")
                 await ctx.send(embed=embed)
             elif isinstance(activity, discord.activity.CustomActivity):
-                await ctx.send(
-                    content=f'Status: {activity.emoji or ""} {activity.name}'
-                )
+                await ctx.send(content=f'Status: {activity.emoji or ""} {activity.name}')
             else:
                 await ctx.send(content=f"{activity.type.name.title()} {activity.name}")
 
@@ -98,19 +94,13 @@ class Activity(commands.Cog):
         description = ""
         description += f"Joined {user.guild} on {user.joined_at.date()}\n"
         description += f"Account created on {user.created_at.date()}\n"
-        description += (
-            user.premium_since and f"Premium since {user.premium_since.date()}\n" or ""
-        )
+        description += user.premium_since and f"Premium since {user.premium_since.date()}\n" or ""
         description += f"Currently {user.status}"
         description += user.is_on_mobile() and " on Mobile\n" or "\n"
         description += f"Top role: {user.top_role}\n"
         description += (
             user.voice
-            and (
-                user.voice.afk
-                and f"AFK in {user.voice.channel}\n"
-                or f"Present in {user.voice.channel}\n"
-            )
+            and (user.voice.afk and f"AFK in {user.voice.channel}\n" or f"Present in {user.voice.channel}\n")
             or ""
         )
         embed = (

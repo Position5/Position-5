@@ -17,14 +17,10 @@ def gen_embed_fii(json_data):
     embed = discord.Embed(title=f"FII/DII Data: {json_data[0]['date']}")
     for item in json_data:
         embed.add_field(name="\u200b", value="\u200b", inline=False)
-        embed.add_field(
-            name=item["category"].split(" ", 1)[0], value="\u200b", inline=False
-        )
-        embed.add_field(
-            name="Buy Value", value=item["buyValue"], inline=True
-        ).add_field(name="Sell Value", value=item["sellValue"], inline=True).add_field(
-            name="Net Value", value=item["netValue"], inline=True
-        )
+        embed.add_field(name=item["category"].split(" ", 1)[0], value="\u200b", inline=False)
+        embed.add_field(name="Buy Value", value=item["buyValue"], inline=True).add_field(
+            name="Sell Value", value=item["sellValue"], inline=True
+        ).add_field(name="Net Value", value=item["netValue"], inline=True)
     return embed
 
 
@@ -64,9 +60,7 @@ class Stock(commands.Cog):
                     return
                 await ctx.send(embed=gen_embed_fii(json_data))
 
-    @commands.command(
-        name="fiir", description="latest fii data via requests(synchronous)"
-    )
+    @commands.command(name="fiir", description="latest fii data via requests(synchronous)")
     @delete_message()
     @log_params()
     async def fii_synchronous(self, ctx):

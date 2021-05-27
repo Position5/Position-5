@@ -13,9 +13,7 @@ class Basic(commands.Cog):
         start = dt.timestamp(dt.now())
         msg = await ctx.send(content="Pinging")
 
-        await msg.edit(
-            content=f"Pong!\nOne message round-trip took {(dt.timestamp(dt.now())-start) * 1000}ms."
-        )
+        await msg.edit(content=f"Pong!\nOne message round-trip took {(dt.timestamp(dt.now())-start) * 1000}ms.")
 
     @commands.command(
         name="say",

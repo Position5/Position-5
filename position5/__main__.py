@@ -18,17 +18,11 @@ def get_prefix(client, message):
 
 
 def setup_logging():
-    file_handler = logging.FileHandler(
-        filename="discord.log", encoding="utf-8", mode="w"
-    )
-    file_handler.setFormatter(
-        logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s")
-    )
+    file_handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
+    file_handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s"))
 
     stdout_handler = logging.StreamHandler(sys.stdout)
-    stdout_handler.setFormatter(
-        logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s")
-    )
+    stdout_handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s"))
 
     dpy_logger = logging.getLogger("discord")
     dpy_logger.setLevel(logging.INFO)
@@ -39,9 +33,7 @@ def setup_logging():
     position5_logger.addHandler(stdout_handler)
 
 
-bot = commands.Bot(
-    command_prefix=get_prefix, case_insensitive=True, intents=discord.Intents().all()
-)
+bot = commands.Bot(command_prefix=get_prefix, case_insensitive=True, intents=discord.Intents().all())
 
 
 cogs = [

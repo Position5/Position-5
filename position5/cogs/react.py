@@ -20,9 +20,7 @@ class React(commands.Cog):
     async def text_to_alpha_emotes(self, ctx, *, text):
         await ctx.send(content=("".join([char_to_emoji(char) for char in text])))
 
-    @commands.command(
-        name="avatar", description="get user avatar", aliases=["av"], usage="user"
-    )
+    @commands.command(name="avatar", description="get user avatar", aliases=["av"], usage="user")
     @delete_message()
     @log_params()
     async def user_avatar(self, ctx, *, avamember: discord.Member = None):

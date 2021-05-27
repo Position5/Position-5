@@ -16,9 +16,10 @@ disable=missing-function-docstring,
       missing-function-docstring,
       missing-module-docstring,
       missing-class-docstring,
-      line-too-long,
       no-member,
-      unused-argument
+      unused-argument,
+      too-many-locals,
+      unused-variable
 enable=c-extension-no-member
 
 
@@ -76,7 +77,7 @@ ignore-long-lines=^\s*(# )?<?https?://\S+>?$
 
 indent-after-paren=4
 indent-string='    '
-max-line-length=88
+max-line-length=120
 max-module-lines=1000
 single-line-class-stmt=no
 single-line-if-stmt=no

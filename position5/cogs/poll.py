@@ -16,9 +16,7 @@ class Poll(commands.Cog):
         embed = (
             discord.Embed(title=question)
             .set_footer(text="Poll will end in 30 seconds! Please react once.")
-            .set_author(
-                name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url
-            )
+            .set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
         )
         message = await ctx.send(embed=embed)
         for reaction in reactions:
@@ -36,10 +34,12 @@ class Poll(commands.Cog):
 
         yes_count = reaction_count.get("✅", 1) - 1
         no_count = reaction_count.get("❌", 1) - 1
+        dont_care = reaction_count.get("💤", 1) - 1
 
         results = discord.Embed(
             title="Results",
-            description=f"Asked: **{question}**\n\n✅ : Yes({yes_count})\n\n❌ : No({no_count}) \n\n💤 : Don't care({total_count - yes_count - no_count})",
+            description=f"Asked: **{question}**\n\n✅ : Yes({yes_count})\n\n"
+            + f"❌ : No({no_count}) \n\n💤 : Don't care({dont_care})",
         )
         await ctx.send(embed=results)
 

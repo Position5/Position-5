@@ -15,9 +15,7 @@ class Cricket(commands.Cog):
     @log_params()
     async def cricket_scores(self, ctx):
         def check(msg):
-            return (
-                msg.channel == ctx.message.channel and msg.author == ctx.message.author
-            )
+            return msg.channel == ctx.message.channel and msg.author == ctx.message.author
 
         msg_og = await ctx.send(
             embed=discord.Embed(
@@ -54,9 +52,7 @@ class Cricket(commands.Cog):
             scores = self.cricket_api.cricketScore({"unique_id": history[reply]})
             response = (
                 discord.Embed(
-                    title=scores["score"].replace("&amp;", "&")
-                    if "score" in scores
-                    else "Score not found",
+                    title=scores["score"].replace("&amp;", "&") if "score" in scores else "Score not found",
                     color=discord.Color.random(),
                 )
                 .set_thumbnail(url=self.bot.user.avatar_url)

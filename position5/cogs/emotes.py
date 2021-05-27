@@ -11,23 +11,15 @@ class Emotes(commands.Cog):
         self._refresh_emotes()
 
     def _refresh_emotes(self):
-        self.emotes = [
-            f.name
-            for f in sorted(Path(EMOTES_PATH).iterdir(), key=getmtime)
-            if isfile(f)
-        ]
-        self.emotes_dict = {
-            emote.split(".", 1)[0].lower(): emote for emote in self.emotes
-        }
+        self.emotes = [f.name for f in sorted(Path(EMOTES_PATH).iterdir(), key=getmtime) if isfile(f)]
+        self.emotes_dict = {emote.split(".", 1)[0].lower(): emote for emote in self.emotes}
 
     @commands.command(name="emote", description="emote as pictures", usage="<emote>")
     @delete_message()
     @log_params()
     async def send_emote(self, ctx, *, emote_name: str):
         if emote_name.lower() in self.emotes_dict:
-            await ctx.send(
-                file=discord.File(EMOTES_PATH + self.emotes_dict[emote_name.lower()])
-            )
+            await ctx.send(file=discord.File(EMOTES_PATH + self.emotes_dict[emote_name.lower()]))
 
     @commands.command(name="refresh", description="refresh emotes list")
     @delete_message()
@@ -35,9 +27,7 @@ class Emotes(commands.Cog):
     async def refresh_emotes(self, ctx):
         self._refresh_emotes()
 
-    @commands.command(
-        name="emotes", description="sends list of emotes", usage="<search_string>"
-    )
+    @commands.command(name="emotes", description="sends list of emotes", usage="<search_string>")
     @delete_message()
     @log_params()
     async def list_emotes(self, ctx, *, search: str = None):

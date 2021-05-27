@@ -33,7 +33,8 @@ class Fun(commands.Cog):
 
         embed = discord.Embed(
             title="Here's a guess",
-            description=f'Name: {params.get("name") or ""}\nAge: {age.get("age") or ""}\nGender: {gender.get("gender").title() or ""}({gender.get("probability") * 100 or 0}%)',
+            description=f"Name: {params.get('name') or ''}\nAge: {age.get('age') or ''}\n"
+            + f"Gender: {gender.get('gender').title() or ''}({gender.get('probability') * 100 or 0}%)",
             color=discord.Color.random(),
         )
 
