@@ -15,6 +15,7 @@ class Activity(commands.Cog):
             discord.Activity(type=discord.ActivityType.watching, name="DOTA: Dragon's Blood"),
             discord.Streaming(name="Dota 2", url="https://www.twitch.tv/MiaMalkova"),
             discord.Activity(type=discord.ActivityType.watching, name="Snyder Cut"),
+            discord.Activity(type=discord.ActivityType.watching, name="Friends: The Reunion"),
         ]
         self.change_activity.start()
 

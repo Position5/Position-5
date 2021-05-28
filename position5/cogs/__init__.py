@@ -8,6 +8,22 @@ from discord.ext.commands import Context
 
 log = logging.getLogger("position5")
 
+COGS = [
+    "cogs.activity",
+    "cogs.basic",
+    "cogs.core",
+    "cogs.cricket",
+    "cogs.db",
+    "cogs.embed",
+    "cogs.emotes",
+    "cogs.error_handler",
+    "cogs.fun",
+    "cogs.pic",
+    "cogs.poll",
+    "cogs.react",
+    "cogs.stock",
+]
+
 
 EMOTES_PATH = "assets/emotes/"
 FONT_PATH = "assets/font/"

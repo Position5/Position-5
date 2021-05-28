@@ -4,6 +4,7 @@ import logging
 from dotenv import load_dotenv
 from discord.ext import commands
 import discord
+from cogs import COGS
 
 
 def get_prefix(client, message):
@@ -36,37 +37,20 @@ def setup_logging():
 bot = commands.Bot(command_prefix=get_prefix, case_insensitive=True, intents=discord.Intents().all())
 
 
-cogs = [
-    "cogs.activity",
-    "cogs.basic",
-    "cogs.core",
-    "cogs.cricket",
-    "cogs.db",
-    "cogs.embed",
-    "cogs.emotes",
-    "cogs.error_handler",
-    "cogs.fun",
-    "cogs.pic",
-    "cogs.poll",
-    "cogs.react",
-    "cogs.stock",
-]
-
-
 @bot.event
 async def on_ready():
     print("Connected to bot: {}".format(bot.user.name))
     print("Bot ID: {}".format(bot.user.id))
     bot.remove_command("help")
-    for cog in cogs:
+    for cog in COGS:
         bot.load_extension(cog)
 
 
-def main():
+def start_bot():
     setup_logging()
     bot.run(os.getenv("DISCORD_BOT_TOKEN"), bot=True, reconnect=True)
 
 
 if __name__ == "__main__":
     load_dotenv(".env")
-    main()
+    start_bot()

@@ -18,6 +18,7 @@ disable=missing-function-docstring,
       missing-class-docstring,
       no-member,
       unused-argument,
+      import-error,
       unused-variable
 enable=c-extension-no-member
 

@@ -1,6 +1,4 @@
-import json
 from discord.ext import commands
-from aiohttp import ClientSession
 import discord
 import requests
 from . import (
@@ -46,21 +44,7 @@ class Stock(commands.Cog):
         )
         self.cookies = dict(request.cookies)
 
-    @commands.command(name="fii", description="latest fii data")
-    @delete_message()
-    @log_params()
-    async def fii(self, ctx):
-        async with ClientSession() as session:
-            async with session.get(
-                NSE_FII_DII_TRADE_REACT,
-                headers=self.__request_headers,
-            ) as response:
-                json_data = json.loads(await response.text())
-                if json_data[0]["date"] != json_data[1]["date"]:
-                    return
-                await ctx.send(embed=gen_embed_fii(json_data))
-
-    @commands.command(name="fiir", description="latest fii data via requests(synchronous)")
+    @commands.command(name="fii", description="latest fii data via requests(synchronous)")
     @delete_message()
     @log_params()
     async def fii_synchronous(self, ctx):
