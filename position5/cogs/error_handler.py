@@ -34,6 +34,9 @@ class ErrorHandler(commands.Cog):
                 ctx.author.name,
             )
 
+        elif isinstance(error, commands.BadArgument):
+            await ctx.send("Bad arguments to command")
+
         # elif isinstance(error, commands.DisabledCommand):
         #     await ctx.send(f'{ctx.command} has been disabled.')
 
@@ -43,13 +46,10 @@ class ErrorHandler(commands.Cog):
         #     except discord.HTTPException:
         #         pass
 
-        # elif isinstance(error, commands.BadArgument):
-        #     if ctx.command.qualified_name == 'tag list':
-        #         await ctx.send('I could not find that member. Please try again.')
-
         else:
             log.info("Exception in command %s", ctx.command)
             log.error("Type %s | Error: %s", type(error), error)
+            raise error
 
 
 def setup(bot):

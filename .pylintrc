@@ -18,7 +18,6 @@ disable=missing-function-docstring,
       missing-class-docstring,
       no-member,
       unused-argument,
-      too-many-locals,
       unused-variable
 enable=c-extension-no-member
 
