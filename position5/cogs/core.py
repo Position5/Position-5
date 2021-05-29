@@ -3,6 +3,8 @@ from . import log_params, delete_message, COGS
 
 
 class Core(commands.Cog):
+    """Core commands for bot's operation/maintenance. Preferably for admins"""
+
     def __init__(self, bot):
         self.bot = bot
 

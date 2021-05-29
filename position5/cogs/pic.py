@@ -1,18 +1,19 @@
 from io import BytesIO
+from typing import Tuple
 from PIL import Image, ImageFont, ImageDraw
 import discord
 from discord.ext import commands
 from . import delete_message, log_params, EMOTES_PATH, FONT_PATH, MEME_PATH, PIC_PATH, TEMP_PATH
 
 
-def _get_line_count(draw, text, total_width, font):
+def _get_line_count(draw: ImageDraw, text: str, total_width: int, font: ImageFont):
     text_width, _ = draw.textsize(text, font)
     if text_width > total_width:
         return int(round((text_width / total_width) + 1))
     return 1
 
 
-def _get_lines(draw, line_count, text, total_width, font):
+def _get_lines(draw: ImageDraw, line_count: int, text: str, total_width: int, font: ImageFont):
     lines = []
     if line_count > 1:
         last_cut = 0
@@ -49,7 +50,7 @@ def _get_lines(draw, line_count, text, total_width, font):
     return lines
 
 
-def draw_text_with_outline(draw, text, text_x, text_y, font):
+def draw_text_with_outline(draw: ImageDraw, text: str, text_x: int, text_y: int, font: ImageFont):
     draw.text((text_x - 2, text_y - 2), text, (0, 0, 0), font=font)
     draw.text((text_x - 2, text_y + 2), text, (0, 0, 0), font=font)
     draw.text((text_x + 2, text_y - 2), text, (0, 0, 0), font=font)
@@ -57,7 +58,9 @@ def draw_text_with_outline(draw, text, text_x, text_y, font):
     draw.text((text_x, text_y), text, (255, 255, 255), font=font)
 
 
-def draw_text_with_wrapping(draw, text, total_width, font, offset=(0, 0)):
+def draw_text_with_wrapping(
+    draw: ImageDraw, text: str, total_width: int, font: ImageFont, offset: Tuple[int, int] = (0, 0)
+):
     left_offset, top_offset = offset
     line_count = _get_line_count(draw, text, total_width, font=font)
     lines = _get_lines(draw, line_count, text, total_width, font=font)
@@ -68,6 +71,8 @@ def draw_text_with_wrapping(draw, text, total_width, font, offset=(0, 0)):
 
 
 class Pic(commands.Cog):
+    "Meme Formats - Image processing"
+
     def __init__(self, bot):
         self.bot = bot
 
@@ -99,7 +104,7 @@ class Pic(commands.Cog):
         if "|" not in text:
             await ctx.send("| is missing")
             return
-        first_text, second_text = text.split("|", 1)
+        first_text, second_text = map(str.strip, text.split("|", 1))
         total_width, _ = 450, 360
         first_y, second_y = 50, 510
         left_offset = 550

@@ -6,6 +6,8 @@ from . import delete_message, log_params
 
 
 class Activity(commands.Cog):
+    """Commands related to user activity"""
+
     def __init__(self, bot):
         self.bot = bot
         self.support_activities = [
@@ -78,7 +80,7 @@ class Activity(commands.Cog):
                 embed.set_footer(text=f"Streaming at {activity.url}")
                 await ctx.send(embed=embed)
             elif isinstance(activity, discord.activity.CustomActivity):
-                await ctx.send(content=f'Status: {activity.emoji or ""} {activity.name}')
+                await ctx.send(content=f"Status: {activity.emoji or ''} {activity.name}")
             else:
                 await ctx.send(content=f"{activity.type.name.title()} {activity.name}")
 

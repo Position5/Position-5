@@ -4,6 +4,8 @@ from . import delete_message, log_params
 
 
 class Basic(commands.Cog):
+    """Totally basic commands, with no/simple logic"""
+
     def __init__(self, bot):
         self.bot = bot
 

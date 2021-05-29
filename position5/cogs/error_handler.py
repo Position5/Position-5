@@ -5,6 +5,8 @@ log = logging.getLogger("position5.error_handler")
 
 
 class ErrorHandler(commands.Cog):
+    "Handles all errors - or just log them :)"
+
     def __init__(self, bot):
         self.bot = bot
 
@@ -38,11 +40,11 @@ class ErrorHandler(commands.Cog):
             await ctx.send("Bad arguments to command")
 
         # elif isinstance(error, commands.DisabledCommand):
-        #     await ctx.send(f'{ctx.command} has been disabled.')
+        #     await ctx.send(f"{ctx.command} has been disabled.")
 
         # elif isinstance(error, commands.NoPrivateMessage):
         #     try:
-        #         await ctx.author.send(f'{ctx.command} can not be used in Private Messages.')
+        #         await ctx.author.send(f"{ctx.command} can not be used in Private Messages.")
         #     except discord.HTTPException:
         #         pass
 

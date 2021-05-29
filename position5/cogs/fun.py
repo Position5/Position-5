@@ -5,9 +5,10 @@ from . import AGIFY, GENDERIFY, delete_message, log_params
 
 
 class Fun(commands.Cog):
+    "Useless commands"
+
     def __init__(self, bot):
         self.bot = bot
-        self.session = aiohttp.ClientSession()
 
     @commands.command(
         name="who",
@@ -26,19 +27,20 @@ class Fun(commands.Cog):
         if country:
             params["country_id"] = country
 
-        age_resp = await self.session.get(AGIFY, params=params)
-        gender_resp = await self.session.get(GENDERIFY, params=params)
-        age = await age_resp.json()
-        gender = await gender_resp.json()
+        async with aiohttp.ClientSession() as session:
+            age_resp = await session.get(AGIFY, params=params)
+            gender_resp = await session.get(GENDERIFY, params=params)
+            age = await age_resp.json()
+            gender = await gender_resp.json()
 
-        embed = discord.Embed(
-            title="Here's a guess",
-            description=f"Name: {params.get('name') or ''}\nAge: {age.get('age') or ''}\n"
-            + f"Gender: {gender.get('gender').title() or ''}({gender.get('probability') * 100 or 0}%)",
-            color=discord.Color.random(),
-        )
+            embed = discord.Embed(
+                title="Here's a guess",
+                description=f"Name: {params.get('name') or ''}\nAge: {age.get('age') or ''}\n"
+                + f"Gender: {gender.get('gender').title() or ''}({gender.get('probability') * 100 or 0}%)",
+                color=discord.Color.random(),
+            )
 
-        await ctx.send(embed=embed)
+            await ctx.send(embed=embed)
 
 
 def setup(bot):

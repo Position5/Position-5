@@ -4,6 +4,8 @@ from . import delete_message, log_params
 
 
 class Db(commands.Cog):
+    """Fetch and store value in database"""
+
     def __init__(self, bot):
         self.bot = bot
         self.t_db = TinyDB("assets/db/db.json")

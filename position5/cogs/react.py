@@ -4,20 +4,22 @@ import discord
 from . import EMOJIS_DICT, delete_message, log_params
 
 
-def char_to_emoji(char):
+def char_to_emoji(char: str):
     if char.lower() in EMOJIS_DICT:
         return EMOJIS_DICT[char.lower()][0] + " "
     return char
 
 
 class React(commands.Cog):
+    "Commands for adding and clearning reactions"
+
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(name="alpha", description="say with alphabets", usage="<text>")
     @delete_message()
     @log_params()
-    async def text_to_alpha_emotes(self, ctx, *, text):
+    async def text_to_alpha_emotes(self, ctx, *, text: str):
         await ctx.send(content=("".join([char_to_emoji(char) for char in text])))
 
     @commands.command(name="avatar", description="get user avatar", aliases=["av"], usage="user")

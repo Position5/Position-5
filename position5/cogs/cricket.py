@@ -6,6 +6,8 @@ from . import delete_message, log_params
 
 
 class Cricket(commands.Cog):
+    """Cricket commands for now. Can be expanded to Sports if further developed"""
+
     def __init__(self, bot):
         self.bot = bot
         self.cricket_api = Cricapi(os.environ.get("CRIC_API"))

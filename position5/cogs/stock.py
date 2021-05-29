@@ -11,7 +11,7 @@ from . import (
 )
 
 
-def gen_embed_fii(json_data):
+def gen_embed_fii(json_data: dict):
     embed = discord.Embed(title=f"FII/DII Data: {json_data[0]['date']}")
     for item in json_data:
         embed.add_field(name="\u200b", value="\u200b", inline=False)
@@ -23,6 +23,8 @@ def gen_embed_fii(json_data):
 
 
 class Stock(commands.Cog):
+    """Stock market commands. Need funds to develop :)"""
+
     def __init__(self, bot):
         self.bot = bot
         self.__request_headers = {

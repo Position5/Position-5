@@ -13,9 +13,7 @@ unsafe-load-any-extension=no
 
 confidence=
 disable=missing-function-docstring,
-      missing-function-docstring,
       missing-module-docstring,
-      missing-class-docstring,
       no-member,
       unused-argument,
       import-error,

@@ -6,6 +6,8 @@ from . import EMOTES_PATH, delete_message, log_params
 
 
 class Emotes(commands.Cog):
+    "Emotes commands"
+
     def __init__(self, bot):
         self.bot = bot
         self._refresh_emotes()
@@ -31,7 +33,7 @@ class Emotes(commands.Cog):
     @delete_message()
     @log_params()
     async def list_emotes(self, ctx, *, search: str = None):
-        title = f'Available emotes{f"({search})" if search else ""}:'
+        title = f"Available emotes{f'({search})' if search else ''}:"
         emotes_list = []
         desc_list = []
         if search:
