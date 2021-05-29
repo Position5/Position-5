@@ -9,6 +9,7 @@ license = "MIT"
 python = "^3.8"
 tinydb = "^4.4.0"
 Pillow = "^8.2.0"
+asyncpraw = "^7.2.0"
 
 [tool.poetry.dev-dependencies]
 aiohttp = "^3.7.4"

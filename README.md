@@ -9,8 +9,13 @@ Dedicated to best position 5 support.
 - Install Python 3.8+
 - Install `poetry`
 - Install dependencies: `poetry install`
-- Create a `.env` file in this directory, and place token `DISCORD_BOT_TOKEN=token-goes-here`
-  and place cricapi token `CRIC_API=token-goes-here`
+- Create a `.env` file in root directory, and place following tokens:
+```
+DISCORD_BOT_TOKEN=token-goes-here
+CRIC_API=token-goes-here
+REDDIT_ID=token-goes-here
+REDDIT_SECRET=token-goes-here
+```
 
 ### Linting
 
@@ -21,6 +26,6 @@ Use `poetry` to lint and format code:
 
 ### Run the bot
 
-Benefit: run in virtualenv
+Poetry automatically runs on virtualenv
 
 - `poetry run py position5`

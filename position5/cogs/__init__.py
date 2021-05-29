@@ -21,6 +21,7 @@ COGS = [
     "cogs.pic",
     "cogs.poll",
     "cogs.react",
+    "cogs.reddit",
     "cogs.stock",
 ]
 
