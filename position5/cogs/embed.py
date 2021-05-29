@@ -55,6 +55,8 @@ class Embed(commands.Cog):
 
         if cog == "all":
             for cog_t in cogs:
+                if cog_t == "ErrorHandler":
+                    continue
                 cog_commands = self.bot.get_cog(cog_t).get_commands()
                 commands_list = ""
                 for comm in cog_commands:
@@ -64,22 +66,22 @@ class Embed(commands.Cog):
 
             lower_cogs = [c.lower() for c in cogs]
 
-            if cog.lower() in lower_cogs:
+            if cog.lower() in lower_cogs and cog.lower() != "error_handler":
 
                 commands_list = self.bot.get_cog(cogs[lower_cogs.index(cog.lower())]).get_commands()
                 help_text = ""
 
                 for command in commands_list:
-                    help_text += f"```{command.name}```\n" f"**{command.description}**\n\n"
+                    help_text += f"```{command.name}```\n**{command.description}**\n"
 
                     if len(command.aliases) > 0:
-                        help_text += f"**Aliases :** `{'`, `'.join(command.aliases)}`\n\n\n"
+                        help_text += f"**Aliases :** `{'`, `'.join(command.aliases)}`\n\n"
                     else:
                         help_text += "\n"
 
                     help_text += (
                         f"Format: `@{self.bot.user.name}#{self.bot.user.discriminator}"
-                        f" {command.name} {command.usage if command.usage is not None else ''}`\n\n\n\n"
+                        f" {command.name} {command.usage if command.usage is not None else ''}`\n\n"
                     )
                 help_embed.description = help_text
             else:
