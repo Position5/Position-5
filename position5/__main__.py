@@ -1,9 +1,8 @@
-import sys
 import os
-import logging
 from dotenv import load_dotenv
 from discord.ext import commands
 import discord
+from log import setup_logging
 from cogs import COGS
 
 
@@ -16,22 +15,6 @@ def get_prefix(client, message):
 
     # Allow users to @mention the bot instead of using a prefix when using a command.
     return commands.when_mentioned_or(*prefixes)(client, message)
-
-
-def setup_logging():
-    file_handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
-    file_handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s"))
-
-    stdout_handler = logging.StreamHandler(sys.stdout)
-    stdout_handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s"))
-
-    dpy_logger = logging.getLogger("discord")
-    dpy_logger.setLevel(logging.INFO)
-    dpy_logger.addHandler(file_handler)
-
-    position5_logger = logging.getLogger("position5")
-    position5_logger.setLevel(logging.DEBUG)
-    position5_logger.addHandler(stdout_handler)
 
 
 bot = commands.Bot(command_prefix=get_prefix, case_insensitive=True, intents=discord.Intents().all())

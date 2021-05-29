@@ -6,7 +6,7 @@ import functools
 from discord.ext.commands import Context
 
 
-log = logging.getLogger("position5")
+log = logging.getLogger("position5.cogs")
 
 COGS = [
     "cogs.activity",

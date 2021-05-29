@@ -19,6 +19,7 @@ disable=missing-function-docstring,
       no-member,
       unused-argument,
       import-error,
+      no-name-in-module,
       unused-variable
 enable=c-extension-no-member
 

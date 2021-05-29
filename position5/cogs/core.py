@@ -6,19 +6,19 @@ class Core(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    def _reload_cog(self, cog):
+    def _reload_cog(self, cog: str):
         try:
             self.bot.reload_extension(cog)
         except commands.ExtensionNotLoaded:
             self.bot.load_extension(cog)
 
-    def _load_cog(self, cog):
+    def _load_cog(self, cog: str):
         try:
             self.bot.load_extension(cog)
         except commands.ExtensionAlreadyLoaded:
             self.bot.reload_extension(cog)
 
-    def _unload_cog(self, cog):
+    def _unload_cog(self, cog: str):
         try:
             self.bot.unload_extension(cog)
         except commands.ExtensionNotLoaded:
