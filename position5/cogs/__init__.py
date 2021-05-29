@@ -3,6 +3,7 @@ This file contains all constants to be used by cogs
 """
 import logging
 import functools
+import xml.etree.ElementTree as ET
 from discord.ext.commands import Context
 
 
@@ -18,6 +19,7 @@ COGS = [
     "cogs.emotes",
     "cogs.error_handler",
     "cogs.fun",
+    "cogs.pasta",
     "cogs.pic",
     "cogs.poll",
     "cogs.react",
@@ -123,6 +125,12 @@ AGIFY = "https://api.agify.io"
 GENDERIFY = "https://api.genderize.io"
 NSE_FII_DII = "https://www.nseindia.com/reports/fii-dii"
 NSE_FII_DII_TRADE_REACT = "https://www.nseindia.com/api/fiidiiTradeReact"
+
+
+def parse_xml(file_name: str) -> ET.Element:
+    tree = ET.parse(file_name)
+    root = tree.getroot()
+    return root
 
 
 def delete_message():

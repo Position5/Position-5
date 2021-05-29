@@ -23,7 +23,7 @@ class Emotes(commands.Cog):
         if emote_name.lower() in self.emotes_dict:
             await ctx.send(file=discord.File(EMOTES_PATH + self.emotes_dict[emote_name.lower()]))
 
-    @commands.command(name="refresh", description="refresh emotes list")
+    @commands.command(name="refe", description="refresh emotes list")
     @delete_message()
     @log_params()
     async def refresh_emotes(self, ctx):
@@ -45,29 +45,30 @@ class Emotes(commands.Cog):
 
         description = ""
         for emote in emotes_list:
+            description += f"\n➥ {emote}"
             if len(description) >= 1900:
                 desc_list.append(description)
                 description = ""
-            else:
-                description += f"\n➥ {emote}"
+
         if description != "":
             desc_list.append(description)
 
         total_count = len(desc_list)
-        for count, desc in enumerate(desc_list, 1):
-            await ctx.send(
-                embed=discord.Embed(
-                    title=f"{title} [{count}/{total_count}]",
-                    description=desc,
-                    color=discord.Color.random(),
-                )
-            )
-
         if total_count == 0:
             await ctx.send(
                 embed=discord.Embed(
                     title=title,
                     description="No emotes found",
+                    color=discord.Color.random(),
+                )
+            )
+            return
+
+        for count, desc in enumerate(desc_list, 1):
+            await ctx.send(
+                embed=discord.Embed(
+                    title=f"{title} [{count}/{total_count}]",
+                    description=desc,
                     color=discord.Color.random(),
                 )
             )
