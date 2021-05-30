@@ -1,3 +1,4 @@
+from string import Template
 import discord
 from discord.ext import commands
 from . import delete_message, log_params, parse_xml
@@ -8,15 +9,19 @@ class Pasta(commands.Cog):
 
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-        self.pastas = {}
+        self.fixed = {}
+        self.variable = {}
         self._refresh_pasta()
 
     def _refresh_pasta(self):
         root = parse_xml("assets/pasta.xml")
-        self.pastas.clear()
+        self.fixed.clear()
+        self.variable.clear()
         for pasta in root:
             if pasta.tag == "fixed":
-                self.pastas[pasta.attrib["name"]] = pasta.text
+                self.fixed[pasta.attrib["name"]] = pasta.text
+            elif pasta.tag == "variable":
+                self.variable[pasta.attrib["name"]] = (pasta.text, pasta.attrib["vars"])
 
     @commands.command(name="refp", description="refresh pasta")
     @delete_message()
@@ -28,7 +33,7 @@ class Pasta(commands.Cog):
     @delete_message()
     @log_params()
     async def list_pasta(self, ctx: commands.Context):
-        pastas = self.pastas.keys()
+        pastas = list(self.fixed.keys()) + list(self.variable.keys())
         title = "Available pastas:"
         description = ""
         desc_list = []
@@ -56,9 +61,18 @@ class Pasta(commands.Cog):
     @commands.command(name="pasta", description="copy pasta")
     @delete_message()
     @log_params()
-    async def pasta_without_variables(self, ctx: commands.Context, *, pasta_name: str):
-        if pasta := pasta_name.lower() in self.pastas:
-            await ctx.send(self.pastas[pasta])
+    async def pasta_without_variables(self, ctx: commands.Context, pasta_name: str, *, var: str = ""):
+        if pasta_name.lower() in self.fixed:
+            await ctx.send(self.fixed[pasta_name.lower()])
+        elif pasta_name.lower() in self.variable:
+            pasta = self.variable[pasta_name.lower()]
+            _vars = var.split("|")
+            _t_vars = pasta[1].split(",")
+            if len(_vars) != len(_t_vars):
+                return
+            template = Template(pasta[0])
+            gen_text = template.substitute(dict(zip(_t_vars, _vars)))
+            await ctx.send(gen_text)
 
 
 def setup(bot):

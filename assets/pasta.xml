@@ -3,35 +3,47 @@
 <fixed name="wyvern">
 Here's the thing. You said a "wyvern is a dragon." Is it in the same family? Yes. No one's arguing that. As someone who is a 1k MMR feeder who studies dragons, I am telling you, specifically, in dota, no one calls wyverns dragons. If you want to be "specific" like you said, then you shouldn't either. They're not the same thing. If you're saying "dragon family" you're referring to the taxonomic grouping of Varanidae, which includes things from wyverns to eldwurms to drakes. So your reasoning for calling a wyvern a dragon is because random people "call the flying lizards dragons?" Let's get gyarados and charizards in there, then, too. Also, calling someone a noob or a feeder? It's not one or the other, that's not how taxonomy works. They're both. A wyvern is a wyvern and a member of the dragon family. But that's not what you said. You said a wyvern is a dragon, which is not true unless you're okay with calling all members of the dragon family dragons, which means you'd call eldwurms, drakes, and other flying lizards dragons, too. Which you said you don't. It's okay to just admit you're wrong, you know?
 </fixed>
-<fixed name="navy seal">
+<fixed name="navy">
 What the fuck did you just fucking say about me, you little bitch? Ill have you know I graduated top of my class in the Navy Seals, and Ive been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and Im the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. Youre fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and thats just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little clever comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldnt, you didn't, and now youre paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo.
 </fixed>
-<fixed name="heat is die">
+<variable name="kill" vars="var1">
 apology for poor english
 
-when were you when heat legend dies
+when were you when $var1 dies
 
 i was sat at home drinking brain fluid when fred ring
 
-'heat is die'
+'$var1 is kil'
 
 'no'
 
 and you?????????????
-</fixed>
-<fixed name="copy pasta">
+</variable>
+<fixed name="pasta">
 I'm not answering the question, but I need help. I've looked this up on several occasions and I still can't quite figure out what copypasta is. As near as I can tell, story-length memes? Is it just some elite-level inside joke that TL;DR people will never get? I just don't get it. I mean, do people laugh about these?
 </fixed>
-<disabled name="russia something something">
-forgive english, i am Russia.
+<variable name="russia" vars="Russia">
+forgive english, i am $Russia.
 
 i come to study clothing and fashion at American university. i am here little time and i am very hard stress. i am gay also and this very difficult for me, i am very religion person. i never act to be gay with other men before. but after i am in america 6 weeks i am my friend together he is gay also. He was show me American fashion and then we are kiss.
 
-We sex together. I never before now am tell my mother about gay because i am very shame. As i fock this American boy it is very good to me but also i am feel so guilty. I feel extreme guilty as I begin orgasm. I feel so guilty that I pick up my telephone and call Mother in Russia. I awaken her. It too late for stopping so I am cumming sex. I am very upset and guilty and crying, so I yell her, "I AM CUM FROM SEX" (in Russia). She say what? I say "I AM CUM FROM SEX" and she say you boy, do not marry American girl, and I say "NO I AM CUM FROM SEX WITH MAN, I AM IN ASS, I CUM IN ASS" and my mother very angry me. She not get scared though.
+We sex together. I never before now am tell my mother about gay because i am very shame. As i fock this American boy it is very good to me but also i am feel so guilty. I feel extreme guilty as I begin orgasm. I feel so guilty that I pick up my telephone and call Mother in $Russia. I awaken her. It too late for stopping so I am cumming sex. I am very upset and guilty and crying, so I yell her, "I AM CUM FROM SEX" (in $Russia). She say what? I say "I AM CUM FROM SEX" and she say you boy, do not marry American girl, and I say "NO I AM CUM FROM SEX WITH MAN, I AM IN ASS, I CUM IN ASS" and my mother very angry me. She not get scared though.
 
 I hang up phone and am very embarrass. My friend also he is very embarrass. I am guilt and feel very stupid. I wonder, why do I gay with man? But I continue because when it spurt it feel very good in American ass.
-</disabled>
-<variable>
-i think its hilarious u kids talking shit about semphis. u wouldnt say this shit to him at lan, hes jacked. not only that but he wears the freshest clothes, eats at the chillest restaurants and hangs out with the hottest dudes. yall are pathetic lol
+</variable>
+<variable name="jacked" vars="semphis">
+i think its hilarious u kids talking shit about $semphis. u wouldnt say this shit to him at lan, hes jacked. not only that but he wears the freshest clothes, eats at the chillest restaurants and hangs out with the hottest dudes. yall are pathetic lol
+</variable>
+<fixed name="rikirtz">
+HEY RTZ, I'M TRYING TO LEARN TO PLAY RIKI. I JUST HAVE A QUESTION ABOUT THE SKILL BUILD: SHOULD I MAX BACKSTAB LIKE YOU BACKSTABBED EG, SMOKESCREEN SO THEY MISS ME LIKE EG MISS YOU , OR PERMANENT INVISIBILITY SO I COULD DISAPPEAR LIKE YOU DISAPPEARED FROM EG
+</fixed>
+<variable name="stream" vars="Arteezy">
+I owe my life to $Arteezy. I got in a horrible car crash and i was in 6 month coma. The nurse switched to the Twitch channel to $Arteezy's stream. I awoke from my coma and muted it.
+</variable>
+<fixed name="fissure">
+༼ つ ◕_◕ ༽つ (_̅_̅_̅__̅_̅_̲̅F̲̲̅̅I̲̲̅̅S̲̲̅̅S̲̲̅̅U̲̲̅̅R̲̲̅̅E̲̲̅̅_̅_̅_̅_̅_̅_̅()
+</fixed>
+<variable name="ass" vars="james">
+ғʀᴏᴍ ᴛʜᴇ ɢʜᴀsᴛʟʏ ᴇʏʀɪᴇ ɪ ᴄᴀɴ sᴇᴇ ᴛᴏ ᴛʜᴇ ᴇɴᴅs ᴏғ ᴛʜᴇ ᴡᴏʀʟᴅ, ᴀɴᴅ ғʀᴏᴍ ᴛʜɪs ᴠᴀɴᴛᴀɢᴇ ᴘᴏɪɴᴛ I ᴅᴇᴄʟᴀʀᴇ ᴡɪᴛʜ ᴜᴛᴛᴇʀ ᴄᴇʀᴛᴀɪɴᴛʏ ᴛʜᴀᴛ $james ɪs ᴀɴ ᴀss
 </variable>
 </pasta>
