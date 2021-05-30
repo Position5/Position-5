@@ -7,13 +7,13 @@ from . import delete_message, log_params
 class Poll(commands.Cog):
     "Poll implementation"
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.command(name="poll", description="poll without custom options")
     @delete_message()
     @log_params()
-    async def poll_without_options(self, ctx, *, question: str):
+    async def poll_without_options(self, ctx: commands.Context, *, question: str):
         reactions = ["✅", "❌", "💤"]
         embed = (
             discord.Embed(title=question)

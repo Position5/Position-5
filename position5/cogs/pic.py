@@ -73,19 +73,19 @@ def draw_text_with_wrapping(
 class Pic(commands.Cog):
     "Meme Formats - Image processing"
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.command(name="xdoubt", description="xdoubt pic")
     @delete_message()
     @log_params()
-    async def xdoubt(self, ctx):
+    async def xdoubt(self, ctx: commands.Context):
         await ctx.send(file=discord.File(f"{PIC_PATH}xdoubt.png"))
 
     @commands.command(name="kappa", description="make kappa eyes")
     @delete_message()
     @log_params()
-    async def kappa(self, ctx, member: discord.Member):
+    async def kappa(self, ctx: commands.Context, member: discord.Member):
         template = Image.open(f"{EMOTES_PATH}Kappa.png")
         member = member.avatar_url_as(size=64)
         author = ctx.author.avatar_url_as(size=64)
@@ -97,7 +97,7 @@ class Pic(commands.Cog):
     @commands.command(name="drake", description="drake meme", usage="text1 | text2")
     @delete_message()
     @log_params()
-    async def drake(self, ctx, *, text: str = None):
+    async def drake(self, ctx: commands.Context, *, text: str = None):
         if not text:
             await ctx.send(file=discord.File(f"{TEMP_PATH}drake.jpg"))
             return

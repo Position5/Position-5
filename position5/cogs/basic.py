@@ -6,12 +6,12 @@ from . import delete_message, log_params
 class Basic(commands.Cog):
     """Totally basic commands, with no/simple logic"""
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.command(name="ping", description="The ping command", aliases=["p"])
     @log_params()
-    async def ping(self, ctx):
+    async def ping(self, ctx: commands.Context):
         start = dt.timestamp(dt.now())
         msg = await ctx.send(content="Pinging")
 
@@ -25,7 +25,7 @@ class Basic(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def say(self, ctx):
+    async def say(self, ctx: commands.Context):
         msg = ctx.message.content
         prefix_used = ctx.prefix
         alias_used = ctx.invoked_with

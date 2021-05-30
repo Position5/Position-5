@@ -8,7 +8,7 @@ from . import EMOTES_PATH, delete_message, log_params
 class Emotes(commands.Cog):
     "Emotes commands"
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
         self._refresh_emotes()
 
@@ -19,20 +19,20 @@ class Emotes(commands.Cog):
     @commands.command(name="emote", description="emote as pictures", usage="<emote>")
     @delete_message()
     @log_params()
-    async def send_emote(self, ctx, *, emote_name: str):
+    async def send_emote(self, ctx: commands.Context, *, emote_name: str):
         if emote_name.lower() in self.emotes_dict:
             await ctx.send(file=discord.File(EMOTES_PATH + self.emotes_dict[emote_name.lower()]))
 
     @commands.command(name="refe", description="refresh emotes list")
     @delete_message()
     @log_params()
-    async def refresh_emotes(self, ctx):
+    async def refresh_emotes(self, ctx: commands.Context):
         self._refresh_emotes()
 
     @commands.command(name="emotes", description="sends list of emotes", usage="<search_string>")
     @delete_message()
     @log_params()
-    async def list_emotes(self, ctx, *, search: str = None):
+    async def list_emotes(self, ctx: commands.Context, *, search: str = None):
         title = f"Available emotes{f'({search})' if search else ''}:"
         emotes_list = []
         desc_list = []

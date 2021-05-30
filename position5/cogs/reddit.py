@@ -7,7 +7,7 @@ from . import delete_message, log_params
 class Reddit(commands.Cog):
     """Reddit related commands"""
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.reddit = asyncpraw.Reddit(
             client_id=os.getenv("REDDIT_ID"),
@@ -18,7 +18,7 @@ class Reddit(commands.Cog):
     @commands.command(name="chloe", description="get latest chloe")
     @delete_message()
     @log_params()
-    async def get_chloe_latest(self, ctx):
+    async def get_chloe_latest(self, ctx: commands.Context):
         subreddit = await self.reddit.subreddit("chloe")
         async for submission in subreddit.new(limit=1):
             await ctx.send(submission.url)

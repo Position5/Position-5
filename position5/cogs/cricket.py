@@ -8,14 +8,14 @@ from . import delete_message, log_params
 class Cricket(commands.Cog):
     """Cricket commands for now. Can be expanded to Sports if further developed"""
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.cricket_api = Cricapi(os.environ.get("CRIC_API"))
 
     @commands.command(name="cricket", description="cricket commands", aliases=["cric"])
     @delete_message()
     @log_params()
-    async def cricket_scores(self, ctx):
+    async def cricket_scores(self, ctx: commands.Context):
         def check(msg):
             return msg.channel == ctx.message.channel and msg.author == ctx.message.author
 

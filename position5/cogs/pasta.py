@@ -6,7 +6,7 @@ from . import delete_message, log_params, parse_xml
 class Pasta(commands.Cog):
     "Your next door copypasta"
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.pastas = {}
         self._refresh_pasta()
@@ -21,13 +21,13 @@ class Pasta(commands.Cog):
     @commands.command(name="refp", description="refresh pasta")
     @delete_message()
     @log_params()
-    async def refresh_pasta(self, ctx):
+    async def refresh_pasta(self, ctx: commands.Context):
         self._refresh_pasta()
 
     @commands.command(name="pastas", description="sends list of pasta", usage="<search_string>", aliases=["lp"])
     @delete_message()
     @log_params()
-    async def list_pasta(self, ctx):
+    async def list_pasta(self, ctx: commands.Context):
         pastas = self.pastas.keys()
         title = "Available pastas:"
         description = ""
@@ -56,8 +56,7 @@ class Pasta(commands.Cog):
     @commands.command(name="pasta", description="copy pasta")
     @delete_message()
     @log_params()
-    async def pasta_without_variables(self, ctx, *, pasta_name: str):
-        print(repr(pasta_name))
+    async def pasta_without_variables(self, ctx: commands.Context, *, pasta_name: str):
         if pasta_name.lower() in self.pastas:
             await ctx.send(self.pastas[pasta_name.lower()])
 

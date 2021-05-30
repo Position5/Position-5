@@ -7,11 +7,11 @@ log = logging.getLogger("position5.error_handler")
 class ErrorHandler(commands.Cog):
     "Handles all errors - or just log them :)"
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_command_error(self, ctx, error):
+    async def on_command_error(self, ctx: commands.Context, error):
         """The event triggered when an error is raised while invoking a command.
         Parameters
         ------------

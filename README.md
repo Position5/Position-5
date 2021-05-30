@@ -8,7 +8,7 @@ Dedicated to best position 5 support.
 
 - Install Python 3.8+
 - Install `poetry`
-- Install dependencies: `poetry install`
+- Install dependencies: `poetry install --no-root`
 - Create a `.env` file in root directory, and place following tokens:
 ```
 DISCORD_BOT_TOKEN=token-goes-here

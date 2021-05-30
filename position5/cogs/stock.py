@@ -25,7 +25,7 @@ def gen_embed_fii(json_data: dict):
 class Stock(commands.Cog):
     """Stock market commands. Need funds to develop :)"""
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.__request_headers = {
             "Host": "www.nseindia.com",
@@ -49,7 +49,7 @@ class Stock(commands.Cog):
     @commands.command(name="fii", description="latest fii data via requests(synchronous)")
     @delete_message()
     @log_params()
-    async def fii_synchronous(self, ctx):
+    async def fii_synchronous(self, ctx: commands.Context):
         response = self.session.get(
             NSE_FII_DII_TRADE_REACT,
             headers=self.__request_headers,
@@ -67,7 +67,7 @@ class Stock(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def disclaimer(self, ctx):
+    async def disclaimer(self, ctx: commands.Context):
         await ctx.send(content=DISCLAIMER)
 
     @commands.command(name="nifty", description="Why NIFTY")

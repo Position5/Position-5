@@ -7,7 +7,7 @@ from . import AGIFY, GENDERIFY, delete_message, log_params
 class Fun(commands.Cog):
     "Useless commands"
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.command(
@@ -18,7 +18,7 @@ class Fun(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def whoami(self, ctx, name: str = None, *, country: str = None):
+    async def whoami(self, ctx: commands.Context, name: str = None, *, country: str = None):
         params = {}
         if name:
             params["name"] = name

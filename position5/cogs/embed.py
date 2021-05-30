@@ -6,7 +6,7 @@ from . import log_params
 class Embed(commands.Cog):
     """Help and basic embed geenrators"""
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.command(
@@ -14,7 +14,7 @@ class Embed(commands.Cog):
         description="The embed command",
     )
     @log_params()
-    async def embed(self, ctx):
+    async def embed(self, ctx: commands.Context):
         def check(msg):
             return msg.channel == ctx.message.channel and msg.author == ctx.message.author
 
@@ -43,7 +43,7 @@ class Embed(commands.Cog):
         usage="cog",
     )
     @log_params()
-    async def help(self, ctx, cog: str = "all"):
+    async def help(self, ctx: commands.Context, cog: str = "all"):
         help_embed = discord.Embed(title="Help", color=discord.Color.random())
         help_embed.set_thumbnail(url=self.bot.user.avatar_url)
         help_embed.set_footer(
@@ -66,9 +66,9 @@ class Embed(commands.Cog):
 
             lower_cogs = [c.lower() for c in cogs]
 
-            if cog.lower() in lower_cogs and cog.lower() != "error_handler":
+            if cog in lower_cogs and cog != "error_handler":
 
-                commands_list = self.bot.get_cog(cogs[lower_cogs.index(cog.lower())]).get_commands()
+                commands_list = self.bot.get_cog(cogs[lower_cogs.index(cog)]).get_commands()
                 help_text = ""
 
                 for command in commands_list:

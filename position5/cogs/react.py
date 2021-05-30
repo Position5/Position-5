@@ -13,19 +13,19 @@ def char_to_emoji(char: str):
 class React(commands.Cog):
     "Commands for adding and clearning reactions"
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.command(name="alpha", description="say with alphabets", usage="<text>")
     @delete_message()
     @log_params()
-    async def text_to_alpha_emotes(self, ctx, *, text: str):
+    async def text_to_alpha_emotes(self, ctx: commands.Context, *, text: str):
         await ctx.send(content=("".join([char_to_emoji(char) for char in text])))
 
     @commands.command(name="avatar", description="get user avatar", aliases=["av"], usage="user")
     @delete_message()
     @log_params()
-    async def user_avatar(self, ctx, *, avamember: discord.Member = None):
+    async def user_avatar(self, ctx: commands.Context, *, avamember: discord.Member = None):
         await ctx.send(avamember.avatar_url if avamember else ctx.author.avatar_url)
 
     @commands.command(
@@ -36,7 +36,7 @@ class React(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def react_with_emote(self, ctx, *, emoji: str = None):
+    async def react_with_emote(self, ctx: commands.Context, emoji: str):
         index = 0
         if emoji.startswith("-") and " " in emoji:
             _index, emoji = emoji.split(" ", 1)
@@ -56,7 +56,7 @@ class React(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     @delete_message()
     @log_params()
-    async def clear_reactions(self, ctx, *, index: int = 0):
+    async def clear_reactions(self, ctx: commands.Context, *, index: int = 0):
         index = min(abs(index), 9)
         last_message = await ctx.channel.history(limit=index + 1).flatten()
         await last_message[index].clear_reactions()
@@ -69,7 +69,7 @@ class React(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def react_to_previous(self, ctx, *, text: str = None):
+    async def react_to_previous(self, ctx: commands.Context, *, text: str = None):
         index = 0
         if text.startswith("-") and " " in text:
             _index, text = text.split(" ", 1)

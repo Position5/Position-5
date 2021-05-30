@@ -8,7 +8,7 @@ from . import delete_message, log_params
 class Activity(commands.Cog):
     """Commands related to user activity"""
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.support_activities = [
             discord.Game(name="Dota 2"),
@@ -37,7 +37,7 @@ class Activity(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def user_activity(self, ctx, user: discord.Member = None):
+    async def user_activity(self, ctx: commands.Context, user: discord.Member = None):
         if user is None:
             user = ctx.author
         if not user.activities:
@@ -91,7 +91,7 @@ class Activity(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def user_info(self, ctx, user: discord.Member = None):
+    async def user_info(self, ctx: commands.Context, user: discord.Member = None):
         if user is None:
             user = ctx.author
         description = ""
