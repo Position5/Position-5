@@ -55,7 +55,7 @@ class Core(commands.Cog):
     async def reload_cog(self, ctx: commands.Context, cog_name: str):
         self._reload_cog(f"cogs.{cog_name}")
 
-    @commands.command(name="restart", aliases=["reboot", "reload"], hidden=True)
+    @commands.command(name="reload", hidden=True)
     @commands.has_permissions(administrator=True)
     @delete_message()
     @log_params()

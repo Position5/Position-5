@@ -5,8 +5,8 @@ from . import EMOJIS_DICT, delete_message, log_params
 
 
 def char_to_emoji(char: str):
-    if char.lower() in EMOJIS_DICT:
-        return EMOJIS_DICT[char.lower()][0] + " "
+    if (char_l := char.lower()) in EMOJIS_DICT:
+        return EMOJIS_DICT[char_l][0] + " "
     return char
 
 

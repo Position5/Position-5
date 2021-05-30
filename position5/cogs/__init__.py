@@ -25,6 +25,7 @@ COGS = [
     "cogs.react",
     "cogs.reddit",
     "cogs.stock",
+    "cogs.voice",
 ]
 
 

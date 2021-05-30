@@ -57,8 +57,8 @@ class Pasta(commands.Cog):
     @delete_message()
     @log_params()
     async def pasta_without_variables(self, ctx: commands.Context, *, pasta_name: str):
-        if pasta_name.lower() in self.pastas:
-            await ctx.send(self.pastas[pasta_name.lower()])
+        if (pasta := pasta_name.lower()) in self.pastas:
+            await ctx.send(self.pastas[pasta])
 
 
 def setup(bot):
