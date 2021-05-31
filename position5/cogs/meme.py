@@ -57,7 +57,7 @@ def draw_text_with_outline(draw: ImageDraw, text: str, text_x: int, text_y: int,
     draw.text((text_x, text_y), text, (255, 255, 255), font=font)
 
 
-def draw_text_with_wrapping(
+def draw_text_with_wrapping_center(
     draw: ImageDraw, text: str, total_width: int, font: ImageFont, offset: Tuple[int, int] = (0, 0)
 ):
     left_offset, top_offset = offset
@@ -67,6 +67,18 @@ def draw_text_with_wrapping(
     for i in range(0, line_count):
         width, height = draw.textsize(lines[i], font)
         draw_text_with_outline(draw, lines[i], left_offset + (total_width - width) / 2, top_offset + i * height, font)
+
+
+def draw_text_with_wrapping_left(
+    draw: ImageDraw, text: str, total_width: int, font: ImageFont, offset: Tuple[int, int] = (0, 0)
+):
+    left_offset, top_offset = offset
+    line_count = _get_line_count(draw, text, total_width, font=font)
+    lines = _get_lines(draw, line_count, text, total_width, font=font)
+
+    for i in range(0, line_count):
+        _, height = draw.textsize(lines[i], font)
+        draw_text_with_outline(draw, lines[i], left_offset, top_offset + i * height, font)
 
 
 class Meme(commands.Cog):
@@ -94,8 +106,8 @@ class Meme(commands.Cog):
         draw = ImageDraw.Draw(template)
         font = ImageFont.truetype(f"{FONT_PATH}impact.ttf", 52)
 
-        draw_text_with_wrapping(draw, first_text, total_width, font, first_offset)
-        draw_text_with_wrapping(draw, second_text, total_width, font, second_offset)
+        draw_text_with_wrapping_center(draw, first_text, total_width, font, first_offset)
+        draw_text_with_wrapping_center(draw, second_text, total_width, font, second_offset)
 
         template.save(f"{TEMP_PATH}drake.jpg")
         await ctx.send(file=discord.File(f"{TEMP_PATH}drake.jpg"))
@@ -113,10 +125,28 @@ class Meme(commands.Cog):
 
         offset = (60, 520)
         total_width = 400
-        draw_text_with_wrapping(draw, text, total_width, font, offset)
+        draw_text_with_wrapping_center(draw, text, total_width, font, offset)
 
         template.save(f"{TEMP_PATH}truth.jpg")
         await ctx.send(file=discord.File(f"{TEMP_PATH}truth.jpg"))
+
+    @commands.command(name="stonks", description="stonks", usage="small sentence")
+    @delete_message()
+    @log_params()
+    async def stonks(self, ctx: commands.Context, *, text: str = ""):
+        if not text:
+            await ctx.send(file=discord.File(f"{TEMP_PATH}stonks.jpg"))
+            return
+        template = Image.open(f"{MEME_PATH}stonks.jpg")
+        draw = ImageDraw.Draw(template)
+        font = ImageFont.truetype(f"{FONT_PATH}impact.ttf", 60)
+
+        offset = (25, 10)
+        total_width = 666
+        draw_text_with_wrapping_left(draw, text, total_width, font, offset)
+
+        template.save(f"{TEMP_PATH}stonks.jpg")
+        await ctx.send(file=discord.File(f"{TEMP_PATH}stonks.jpg"))
 
 
 def setup(bot):
