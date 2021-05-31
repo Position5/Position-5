@@ -19,6 +19,7 @@ COGS = [
     "cogs.emotes",
     "cogs.error_handler",
     "cogs.fun",
+    "cogs.meme",
     "cogs.pasta",
     "cogs.pic",
     "cogs.poll",
@@ -160,6 +161,18 @@ def log_params():
                 kwargs,
             )
             return await func(*args, **kwargs)
+
+        return wrapped
+
+    return wrapper
+
+
+def disabled():
+    def wrapper(func):
+        @functools.wraps(func)
+        async def wrapped(*args, **kwargs):
+            log.info("%s is disabled", func.__name__)
+            return
 
         return wrapped
 
