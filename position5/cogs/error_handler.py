@@ -38,9 +38,8 @@ class ErrorHandler(commands.Cog):
 
         elif isinstance(error, commands.BadArgument):
             await ctx.send("Bad arguments to command")
-
-        # elif isinstance(error, commands.DisabledCommand):
-        #     await ctx.send(f"{ctx.command} has been disabled.")
+        elif isinstance(error, commands.MissingRequiredArgument):
+            log.error("Arguments missing: %s | Error: %s", ctx.command, error)
 
         # elif isinstance(error, commands.NoPrivateMessage):
         #     try:

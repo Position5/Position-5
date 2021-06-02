@@ -1,4 +1,5 @@
 import os
+import random
 from discord.ext import commands
 import asyncpraw
 from . import delete_message, log_params
@@ -22,6 +23,17 @@ class Reddit(commands.Cog):
         subreddit = await self.reddit.subreddit("chloe")
         async for submission in subreddit.new(limit=1):
             await ctx.send(submission.url)
+
+    @commands.command(name="reddit", description="get latest chloe")
+    @delete_message()
+    @log_params()
+    async def get_reddit_hot_posts(self, ctx: commands.Context, subreddit: str, index: int = None):
+        subreddit = await self.reddit.subreddit(subreddit)
+        posts = [post async for post in subreddit.hot(limit=20) if not (post.is_self or post.stickied)]
+        if index:
+            await ctx.send(posts[index].url)
+        else:
+            await ctx.send(random.choice(posts).url)
 
 
 def setup(bot):
