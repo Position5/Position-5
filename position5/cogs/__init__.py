@@ -19,6 +19,7 @@ COGS = [
     "cogs.emotes",
     "cogs.error_handler",
     "cogs.fun",
+    "cogs.liquipedia",
     "cogs.meme",
     "cogs.pasta",
     "cogs.pic",
@@ -127,6 +128,8 @@ AGIFY = "https://api.agify.io"
 GENDERIFY = "https://api.genderize.io"
 NSE_FII_DII = "https://www.nseindia.com/reports/fii-dii"
 NSE_FII_DII_TRADE_REACT = "https://www.nseindia.com/api/fiidiiTradeReact"
+LIQUIPEDIA = "https://liquipedia.net"
+LIQUIPEDIA_ICON = f"{LIQUIPEDIA}/commons/extensions/TeamLiquidIntegration/resources/pagelogo/liquipedia_icon_menu.png"
 
 
 def parse_xml(file_name: str) -> ET.Element:
