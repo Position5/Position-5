@@ -1,10 +1,11 @@
 """
 This file contains all constants to be used by cogs
 """
+from datetime import datetime
 import logging
 import functools
 import xml.etree.ElementTree as ET
-from discord.ext.commands import Context
+from discord.ext.commands import Bot, Context
 
 
 log = logging.getLogger("position5.cogs")
@@ -131,11 +132,26 @@ NSE_FII_DII_TRADE_REACT = "https://www.nseindia.com/api/fiidiiTradeReact"
 LIQUIPEDIA = "https://liquipedia.net"
 LIQUIPEDIA_ICON = f"{LIQUIPEDIA}/commons/extensions/TeamLiquidIntegration/resources/pagelogo/liquipedia_icon_menu.png"
 
+_levelToName = {
+    logging.CRITICAL: "CRITICAL",
+    logging.ERROR: "ERROR",
+    logging.WARNING: "WARNING",
+    logging.INFO: "INFO",
+    logging.DEBUG: "DEBUG",
+    logging.NOTSET: "NOTSET",
+}
+
 
 def parse_xml(file_name: str) -> ET.Element:
     tree = ET.parse(file_name)
     root = tree.getroot()
     return root
+
+
+async def log_to_specific_channel(bot: Bot, log_message: str, level: int = logging.INFO):
+    channel = bot.get_channel(848526477112770590)
+    level_name = _levelToName.get(level, "INFO")
+    await channel.send(f"{datetime.now()} :: {level_name} :: {log_message}")
 
 
 def delete_message():
@@ -156,13 +172,12 @@ def log_params():
         @functools.wraps(func)
         async def wrapped(*args, **kwargs):
             assert isinstance(ctx := args[1], Context)
-            log.info(
-                "Author: %s | Message: %s | Method: %s | Params: %s",
-                ctx.author.name,
-                ctx.message.content,
-                func.__name__,
-                kwargs,
+            log_message = (
+                f"Author: {ctx.author.name} | Message: {ctx.message.content} |"
+                f" Method: {func.__name__} | Params: {kwargs}"
             )
+            log.info(log_message)
+            await log_to_specific_channel(args[0].bot, log_message)
             return await func(*args, **kwargs)
 
         return wrapped
@@ -174,7 +189,9 @@ def disabled():
     def wrapper(func):
         @functools.wraps(func)
         async def wrapped(*args, **kwargs):
-            log.info("%s is disabled", func.__name__)
+            log_message = f"{func.__name__} is disabled"
+            log.info(log_message)
+            await log_to_specific_channel(args[0].bot, log_message)
             return
 
         return wrapped

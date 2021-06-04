@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "position5"
-version = "0.3.0"
+version = "0.3.1"
 description = "Discord Bot"
 authors = ["Arpit Choudhary <arpitkumar147@gmail.com>"]
 license = "MIT"

@@ -1,5 +1,6 @@
 import logging
 from discord.ext import commands
+from . import log_to_specific_channel
 
 log = logging.getLogger("position5.error_handler")
 
@@ -30,16 +31,18 @@ class ErrorHandler(commands.Cog):
         error = getattr(error, "original", error)
 
         if isinstance(error, commands.CommandNotFound):
-            log.info(
-                "Command Not Found | Message: %s | Author: %s",
-                ctx.message.content,
-                ctx.author.name,
-            )
+            log_message = f"Command Not Found | Message: {ctx.message.content} | Author: {ctx.author.name}"
+            log.info(log_message)
+            await log_to_specific_channel(self.bot, log_message)
 
         elif isinstance(error, commands.BadArgument):
-            await ctx.send("Bad arguments to command")
+            log_message = f"Bad arguments to command | Message: {ctx.message.content} | Author: {ctx.author.name}"
+            log.error(log_message)
+            await log_to_specific_channel(self.bot, log_message, logging.ERROR)
         elif isinstance(error, commands.MissingRequiredArgument):
-            log.error("Arguments missing: %s | Error: %s", ctx.command, error)
+            log_message = f"Arguments missing: {ctx.command} | Error: {error}"
+            log.error(log_message)
+            await log_to_specific_channel(self.bot, log_message, logging.ERROR)
 
         # elif isinstance(error, commands.NoPrivateMessage):
         #     try:
@@ -48,7 +51,9 @@ class ErrorHandler(commands.Cog):
         #         pass
 
         else:
-            log.info("Exception in command %s", ctx.command)
+            log_message = f"Exception in command {ctx.command}"
+            log.info(log_message)
+            await log_to_specific_channel(self.bot, log_message)
             log.error("Type %s | Error: %s", type(error), error)
             raise error
 
