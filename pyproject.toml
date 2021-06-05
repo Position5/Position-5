@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "position5"
-version = "0.3.1"
+version = "0.3.2"
 description = "Discord Bot"
 authors = ["Arpit Choudhary <arpitkumar147@gmail.com>"]
 license = "MIT"
@@ -16,6 +16,7 @@ cricapi = "^1.2"
 requests = "^2.25.1"
 beautifulsoup4 = "^4.9.3"
 python-dateutil = "^2.8.1"
+glitch-this = "^1.0.2"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
