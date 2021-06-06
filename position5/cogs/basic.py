@@ -1,4 +1,5 @@
 from datetime import datetime as dt
+import discord
 from discord.ext import commands
 from . import delete_message, log_params
 
@@ -35,6 +36,14 @@ class Basic(commands.Cog):
             await ctx.send(content="You need to specify the text!")
         else:
             await ctx.send(content=text)
+
+    @commands.command(name="dm", description="dm user", hidden=True)
+    @commands.has_permissions(administrator=True)
+    @delete_message()
+    @log_params()
+    async def send_dm(self, ctx: commands.Context, member: discord.Member, *, content: str):
+        channel = await member.create_dm()
+        await channel.send(content)
 
 
 def setup(bot):
