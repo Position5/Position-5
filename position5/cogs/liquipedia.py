@@ -13,7 +13,9 @@ class Liquipedia(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @commands.command(name="dota", description="dota schedule", aliases=["animajor", "major"])
+    @commands.command(
+        name="dota", description="dota schedule", aliases=["animajor", "major"]
+    )
     @delete_message()
     @log_params()
     async def dota_schedule(self, ctx: commands.Context, *, url: str = ""):
@@ -23,7 +25,12 @@ class Liquipedia(commands.Cog):
         soup = BeautifulSoup(_resp.text, "html.parser")
 
         upcoming_matches = soup.find(string="Upcoming Matches")
-        tables = upcoming_matches.find_parent("div").find_parent("div").find_parent("div").find_all("table")
+        tables = (
+            upcoming_matches.find_parent("div")
+            .find_parent("div")
+            .find_parent("div")
+            .find_all("table")
+        )
 
         title = soup.title.text.split("-")[0].strip()
         description = ""
@@ -33,11 +40,15 @@ class Liquipedia(commands.Cog):
                 rows = tbody.find_all("tr")
                 teams = rows[0].find_all("td")
                 stream_info = rows[1].td
-                time = parser.parse(stream_info.span.span.text) + timedelta(hours=5, minutes=30)
+                time = parser.parse(stream_info.span.span.text) + timedelta(
+                    hours=5, minutes=30
+                )
 
                 description += f"{stream_info.div.div.text}\n"
                 description += f"{teams[0].span['data-highlightingclass']}"
-                description += f" {teams[1].text} {teams[2].span['data-highlightingclass']}\n"
+                description += (
+                    f" {teams[1].text} {teams[2].span['data-highlightingclass']}\n"
+                )
                 description += f"Time: {time.strftime('%b %d, %Y %H:%M')}\n"
                 description += f"Watch on: https://twitch.tv/{stream_info.span.span['data-stream-twitch']}\n\n"
 

@@ -6,9 +6,8 @@ Dedicated to best position 5 support.
 
 ## Setting Up
 
-- Install Python 3.8+
-- Install `poetry`
-- Install dependencies: `poetry install --no-root`
+- Install Python 3.10+
+- Install dependencies: `pip install -r requirements.txt`
 - Create a `.env` file in root directory, and place following tokens:
 ```
 DISCORD_BOT_TOKEN=token-goes-here
@@ -19,13 +18,13 @@ REDDIT_SECRET=token-goes-here
 
 ### Linting
 
-Use `poetry` to lint and format code:
+Use `black` and `pylint` to lint and format code:
 
-- `poetry run pylint position5`
-- `poetry run black position5`
+- `pylint position5`
+- `black position5`
 
 ### Run the bot
 
-Poetry automatically runs on virtualenv
+Run from root folder
 
-- `poetry run py position5`
+- `py position5`

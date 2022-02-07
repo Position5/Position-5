@@ -18,7 +18,9 @@ class Fun(commands.Cog):
     )
     @delete_message()
     @log_params()
-    async def whoami(self, ctx: commands.Context, name: str = None, *, country: str = None):
+    async def whoami(
+        self, ctx: commands.Context, name: str = None, *, country: str = None
+    ):
         params = {}
         if name:
             params["name"] = name

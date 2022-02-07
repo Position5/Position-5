@@ -12,7 +12,9 @@ def _get_line_count(draw: ImageDraw, text: str, total_width: int, font: ImageFon
     return 1
 
 
-def _get_lines(draw: ImageDraw, line_count: int, text: str, total_width: int, font: ImageFont):
+def _get_lines(
+    draw: ImageDraw, line_count: int, text: str, total_width: int, font: ImageFont
+):
     lines = []
     if line_count > 1:
         last_cut = 0
@@ -49,7 +51,9 @@ def _get_lines(draw: ImageDraw, line_count: int, text: str, total_width: int, fo
     return lines
 
 
-def draw_text_with_outline(draw: ImageDraw, text: str, text_x: int, text_y: int, font: ImageFont):
+def draw_text_with_outline(
+    draw: ImageDraw, text: str, text_x: int, text_y: int, font: ImageFont
+):
     draw.text((text_x - 2, text_y - 2), text, (0, 0, 0), font=font)
     draw.text((text_x - 2, text_y + 2), text, (0, 0, 0), font=font)
     draw.text((text_x + 2, text_y - 2), text, (0, 0, 0), font=font)
@@ -58,7 +62,11 @@ def draw_text_with_outline(draw: ImageDraw, text: str, text_x: int, text_y: int,
 
 
 def draw_text_with_wrapping_center(
-    draw: ImageDraw, text: str, total_width: int, font: ImageFont, offset: Tuple[int, int] = (0, 0)
+    draw: ImageDraw,
+    text: str,
+    total_width: int,
+    font: ImageFont,
+    offset: Tuple[int, int] = (0, 0),
 ):
     left_offset, top_offset = offset
     line_count = _get_line_count(draw, text, total_width, font=font)
@@ -66,11 +74,21 @@ def draw_text_with_wrapping_center(
 
     for i in range(0, line_count):
         width, height = draw.textsize(lines[i], font)
-        draw_text_with_outline(draw, lines[i], left_offset + (total_width - width) / 2, top_offset + i * height, font)
+        draw_text_with_outline(
+            draw,
+            lines[i],
+            left_offset + (total_width - width) / 2,
+            top_offset + i * height,
+            font,
+        )
 
 
 def draw_text_with_wrapping_left(
-    draw: ImageDraw, text: str, total_width: int, font: ImageFont, offset: Tuple[int, int] = (0, 0)
+    draw: ImageDraw,
+    text: str,
+    total_width: int,
+    font: ImageFont,
+    offset: Tuple[int, int] = (0, 0),
 ):
     left_offset, top_offset = offset
     line_count = _get_line_count(draw, text, total_width, font=font)
@@ -78,7 +96,9 @@ def draw_text_with_wrapping_left(
 
     for i in range(0, line_count):
         _, height = draw.textsize(lines[i], font)
-        draw_text_with_outline(draw, lines[i], left_offset, top_offset + i * height, font)
+        draw_text_with_outline(
+            draw, lines[i], left_offset, top_offset + i * height, font
+        )
 
 
 class Meme(commands.Cog):
@@ -106,13 +126,21 @@ class Meme(commands.Cog):
         draw = ImageDraw.Draw(template)
         font = ImageFont.truetype(f"{FONT_PATH}impact.ttf", 52)
 
-        draw_text_with_wrapping_center(draw, first_text, total_width, font, first_offset)
-        draw_text_with_wrapping_center(draw, second_text, total_width, font, second_offset)
+        draw_text_with_wrapping_center(
+            draw, first_text, total_width, font, first_offset
+        )
+        draw_text_with_wrapping_center(
+            draw, second_text, total_width, font, second_offset
+        )
 
         template.save(f"{TEMP_PATH}drake.jpg")
         await ctx.send(file=discord.File(f"{TEMP_PATH}drake.jpg"))
 
-    @commands.command(name="truth", description="tell me the truth(peter parker) meme", usage="small sentence")
+    @commands.command(
+        name="truth",
+        description="tell me the truth(peter parker) meme",
+        usage="small sentence",
+    )
     @delete_message()
     @log_params()
     async def tell_me_the_truth(self, ctx: commands.Context, *, text: str = ""):

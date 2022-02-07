@@ -17,13 +17,15 @@ def get_prefix(client, message):
     return commands.when_mentioned_or(*prefixes)(client, message)
 
 
-bot = commands.Bot(command_prefix=get_prefix, case_insensitive=True, intents=discord.Intents().all())
+bot = commands.Bot(
+    command_prefix=get_prefix, case_insensitive=True, intents=discord.Intents().all()
+)
 
 
 @bot.event
 async def on_ready():
-    print("Connected to bot: {}".format(bot.user.name))
-    print("Bot ID: {}".format(bot.user.id))
+    print(f"Connected to bot: {bot.user.name}")
+    print(f"Bot ID: {bot.user.id}")
     bot.remove_command("help")
     for cog in COGS:
         bot.load_extension(cog)

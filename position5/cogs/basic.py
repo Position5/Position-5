@@ -16,7 +16,9 @@ class Basic(commands.Cog):
         start = dt.timestamp(dt.now())
         msg = await ctx.send(content="Pinging")
 
-        await msg.edit(content=f"Pong!\nOne message round-trip took {(dt.timestamp(dt.now())-start) * 1000}ms.")
+        await msg.edit(
+            content=f"Pong!\nOne message round-trip took {(dt.timestamp(dt.now())-start) * 1000}ms."
+        )
 
     @commands.command(
         name="say",
@@ -41,7 +43,9 @@ class Basic(commands.Cog):
     @commands.has_permissions(administrator=True)
     @delete_message()
     @log_params()
-    async def send_dm(self, ctx: commands.Context, member: discord.Member, *, content: str):
+    async def send_dm(
+        self, ctx: commands.Context, member: discord.Member, *, content: str
+    ):
         channel = await member.create_dm()
         await channel.send(content)
 

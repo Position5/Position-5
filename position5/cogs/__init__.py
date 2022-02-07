@@ -22,6 +22,7 @@ COGS = [
     "cogs.fun",
     "cogs.liquipedia",
     "cogs.meme",
+    "cogs.music",
     "cogs.pasta",
     "cogs.pic",
     "cogs.poll",
@@ -148,7 +149,9 @@ def parse_xml(file_name: str) -> ET.Element:
     return root
 
 
-async def log_to_specific_channel(bot: Bot, log_message: str, level: int = logging.INFO):
+async def log_to_specific_channel(
+    bot: Bot, log_message: str, level: int = logging.INFO
+):
     channel = bot.get_channel(848526477112770590)
     level_name = _levelToName.get(level, "INFO")
     await channel.send(f"{datetime.now()} :: {level_name} :: {log_message}")

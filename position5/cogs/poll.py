@@ -18,7 +18,9 @@ class Poll(commands.Cog):
         embed = (
             discord.Embed(title=question)
             .set_footer(text="Poll will end in 30 seconds! Please react once.")
-            .set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+            .set_author(
+                name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url
+            )
         )
         message = await ctx.send(embed=embed)
         for reaction in reactions:

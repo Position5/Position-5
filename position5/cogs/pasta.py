@@ -29,7 +29,12 @@ class Pasta(commands.Cog):
     async def refresh_pasta(self, ctx: commands.Context):
         self._refresh_pasta()
 
-    @commands.command(name="pastas", description="sends list of pasta", usage="<search_string>", aliases=["lp"])
+    @commands.command(
+        name="pastas",
+        description="sends list of pasta",
+        usage="<search_string>",
+        aliases=["lp"],
+    )
     @delete_message()
     @log_params()
     async def list_pasta(self, ctx: commands.Context):
@@ -61,7 +66,9 @@ class Pasta(commands.Cog):
     @commands.command(name="pasta", description="copy pasta")
     @delete_message()
     @log_params()
-    async def pasta_without_variables(self, ctx: commands.Context, pasta_name: str, *, var: str = ""):
+    async def pasta_without_variables(
+        self, ctx: commands.Context, pasta_name: str, *, var: str = ""
+    ):
         if pasta_name.lower() in self.fixed:
             await ctx.send(self.fixed[pasta_name.lower()])
         elif pasta_name.lower() in self.variable:

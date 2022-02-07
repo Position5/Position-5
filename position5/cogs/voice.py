@@ -33,6 +33,17 @@ class Voice(commands.Cog):
             log.error("Type %s | Error: %s", type(error), error)
             raise error
 
+    @commands.command(name="move", description="move to current voice channel")
+    @delete_message()
+    @log_params()
+    async def move_to_voice_channel(self, ctx: commands.Context):
+        voice = ctx.author.voice
+        if not voice:
+            await ctx.send("You're not in a voice channel")
+            return
+        voice_client = ctx.voice_client
+        await voice_client.move_to(voice.channel)
+
     @commands.command(name="leave", description="leaves voice channel")
     @delete_message()
     @log_params()

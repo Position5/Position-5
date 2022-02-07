@@ -31,7 +31,11 @@ class Pic(commands.Cog):
         template.save(f"{TEMP_PATH}completed.png")
         await ctx.send(file=discord.File(f"{TEMP_PATH}completed.png"))
 
-    @commands.command(name="glitch", description="glitch image color", usage="upload image(float 0-10)")
+    @commands.command(
+        name="glitch",
+        description="glitch image color",
+        usage="upload image(float 0-10)",
+    )
     @delete_message()
     @log_params()
     async def glitch_color(self, ctx: commands.Context, amount: float = 2.718):
@@ -41,7 +45,11 @@ class Pic(commands.Cog):
             glitch_img.save(f"{TEMP_PATH}glitch.png")
             await ctx.send(file=discord.File(f"{TEMP_PATH}glitch.png"))
 
-    @commands.command(name="glitchp", description="glitch image position", usage="upload image(float 0-10)")
+    @commands.command(
+        name="glitchp",
+        description="glitch image position",
+        usage="upload image(float 0-10)",
+    )
     @delete_message()
     @log_params()
     async def glitch_position(self, ctx: commands.Context, amount: float = 2.718):

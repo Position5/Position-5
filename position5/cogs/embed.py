@@ -16,7 +16,9 @@ class Embed(commands.Cog):
     @log_params()
     async def embed(self, ctx: commands.Context):
         def check(msg):
-            return msg.channel == ctx.message.channel and msg.author == ctx.message.author
+            return (
+                msg.channel == ctx.message.channel and msg.author == ctx.message.author
+            )
 
         await ctx.send(content="What would you like the title to be?")
 
@@ -32,7 +34,9 @@ class Embed(commands.Cog):
         embed = (
             discord.Embed(title=title, description=desc, color=discord.Color.random())
             .set_thumbnail(url=self.bot.user.avatar_url)
-            .set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+            .set_author(
+                name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url
+            )
         )
         await msg.edit(embed=embed, content=None)
 
@@ -68,14 +72,18 @@ class Embed(commands.Cog):
 
             if cog in lower_cogs and cog != "error_handler":
 
-                commands_list = self.bot.get_cog(cogs[lower_cogs.index(cog)]).get_commands()
+                commands_list = self.bot.get_cog(
+                    cogs[lower_cogs.index(cog)]
+                ).get_commands()
                 help_text = ""
 
                 for command in commands_list:
                     help_text += f"```{command.name}```\n**{command.description}**\n"
 
                     if len(command.aliases) > 0:
-                        help_text += f"**Aliases :** `{'`, `'.join(command.aliases)}`\n\n"
+                        help_text += (
+                            f"**Aliases :** `{'`, `'.join(command.aliases)}`\n\n"
+                        )
                     else:
                         help_text += "\n"
 
@@ -85,7 +93,9 @@ class Embed(commands.Cog):
                     )
                 help_embed.description = help_text
             else:
-                await ctx.send("Invalid cog specified.\nUse `help` command to list all cogs.")
+                await ctx.send(
+                    "Invalid cog specified.\nUse `help` command to list all cogs."
+                )
                 return
 
         await ctx.send(embed=help_embed)

@@ -11,7 +11,9 @@ class Db(commands.Cog):
         self.t_db = TinyDB("assets/db/db.json")
         self.query = Query()
 
-    @commands.command(name="store", description="saves key value pair in database", aliases=["save"])
+    @commands.command(
+        name="store", description="saves key value pair in database", aliases=["save"]
+    )
     @delete_message()
     @log_params()
     async def store_data(self, ctx: commands.Context, key: str, *, value: str):
@@ -20,11 +22,15 @@ class Db(commands.Cog):
             (self.query[key].exists()) & (self.query.author == ctx.author.id),
         )
 
-    @commands.command(name="get", description="fetches value from database", aliases=["fetch"])
+    @commands.command(
+        name="get", description="fetches value from database", aliases=["fetch"]
+    )
     @delete_message()
     @log_params()
     async def get_data(self, ctx: commands.Context, key: str):
-        result = self.t_db.get((self.query[key].exists()) & (self.query.author == ctx.author.id))
+        result = self.t_db.get(
+            (self.query[key].exists()) & (self.query.author == ctx.author.id)
+        )
         await ctx.send(result and f"Found - {key} : {result[key]}" or "Value not found")
 
 

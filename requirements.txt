@@ -17,3 +17,4 @@ six
 soupsieve
 tinydb
 urllib3
+youtube_dl

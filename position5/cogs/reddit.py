@@ -27,9 +27,15 @@ class Reddit(commands.Cog):
     @commands.command(name="reddit", description="get latest chloe")
     @delete_message()
     @log_params()
-    async def get_reddit_hot_posts(self, ctx: commands.Context, subreddit: str, index: int = None):
+    async def get_reddit_hot_posts(
+        self, ctx: commands.Context, subreddit: str, index: int = None
+    ):
         subreddit = await self.reddit.subreddit(subreddit)
-        posts = [post async for post in subreddit.hot(limit=20) if not (post.is_self or post.stickied)]
+        posts = [
+            post
+            async for post in subreddit.hot(limit=20)
+            if not (post.is_self or post.stickied)
+        ]
         if index:
             await ctx.send(posts[index].url)
         else:
