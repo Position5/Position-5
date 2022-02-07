@@ -9,6 +9,7 @@ discord.py==1.7.3
 glitch-this
 numpy
 pillow
+pylint
 pynacl
 python-dateutil
 python-dotenv
