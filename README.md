@@ -14,6 +14,8 @@ DISCORD_BOT_TOKEN=token-goes-here
 CRIC_API=token-goes-here
 REDDIT_ID=token-goes-here
 REDDIT_SECRET=token-goes-here
+AWS_ACCESS_KEY_ID=token-goes-here
+AWS_SECRET_ACCESS_KEY=token-goes-here
 ```
 
 ### Linting
