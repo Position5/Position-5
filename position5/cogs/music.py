@@ -2,7 +2,7 @@ import asyncio
 import discord
 import youtube_dl
 from discord.ext import commands
-from . import delete_message, log_params
+from . import delete_message, log_params, FFMPEG_OPTIONS
 
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ""
@@ -21,8 +21,6 @@ ytdl_format_options = {
     "default_search": "auto",
     "source_address": "0.0.0.0",  # bind to ipv4 since ipv6 addresses cause issues sometimes
 }
-
-ffmpeg_options = {"options": "-vn", "executable": "assets/bin/ffmpeg.exe"}
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
@@ -50,7 +48,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
             data = data["entries"][0]
 
         filename = data["url"] if stream else ytdl.prepare_filename(data)
-        return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
+        return cls(discord.FFmpegPCMAudio(filename, **FFMPEG_OPTIONS), data=data)
 
 
 class Music(commands.Cog):

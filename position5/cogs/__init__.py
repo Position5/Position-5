@@ -10,6 +10,8 @@ from discord.ext.commands import Bot, Context
 
 log = logging.getLogger("position5.cogs")
 
+FFMPEG_OPTIONS = {"options": "-vn", "executable": "assets/bin/ffmpeg.exe"}
+
 COGS = [
     "cogs.activity",
     "cogs.basic",
@@ -29,6 +31,7 @@ COGS = [
     "cogs.react",
     "cogs.reddit",
     "cogs.stock",
+    "cogs.tts",
     "cogs.voice",
 ]
 

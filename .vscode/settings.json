@@ -2,5 +2,6 @@
     "python.linting.pylintEnabled": true,
     "python.analysis.diagnosticSeverityOverrides": {
         "reportMissingImports": "none"
-    }
+    },
+    "python.formatting.provider": "black"
 }
